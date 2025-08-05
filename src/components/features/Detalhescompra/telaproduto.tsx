@@ -1,0 +1,153 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../cartprovinder/cartcontext";
+
+interface ProdutoType {
+  id: string;
+  titulo: string;
+  preco: string;
+  imagem: string;   
+  imagemdesc: string;
+  desc: string;
+  tamanhos: string[];
+  categoria: string;
+}
+
+interface ProdutoProps {
+  produto: ProdutoType;
+}
+
+const ProductImage = ({ src, alt }: { src: string; alt: string }) => (
+  <div className="w-full aspect-square bg-white rounded-2xl shadow-lg flex items-center justify-center overflow-hidden">
+    <img
+      src={src}
+      alt={alt}
+      className="object-contain w-full h-full transition-transform duration-300 hover:scale-105"
+    />
+  </div>
+);
+
+const SizeButton = ({
+  size,
+  isSelected,
+  onClick,
+}: {
+  size: string;
+  isSelected: boolean;
+  onClick: () => void;
+}) => (
+  <button
+    onClick={onClick}
+    className={`
+      w-14 h-14 flex items-center justify-center border-2
+      text-lg transition
+      ${
+        isSelected
+          ? "bg-black text-white border-black scale-105 shadow-lg"
+          : "bg-white text-neutral-900 border-neutral-300 hover:bg-neutral-200"
+      }
+    `}
+  >
+    {size}
+  </button>
+);
+
+const Produto = ({ produto }: ProdutoProps) => {
+  const { adicionarProduto } = useCart();
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      alert("Por favor, selecione um tamanho.");
+      return;
+    }
+
+    const precoNumerico = parseFloat(
+      produto.preco.replace("R$", "").replace(".", "").replace(",", ".")
+    );
+
+    if (isNaN(precoNumerico)) {
+      alert("Preço do produto inválido");
+      return;
+    }
+
+    const produtoParaCarrinho = {
+      id: parseInt(produto.id, 10),
+      nome: produto.titulo,
+      preco: precoNumerico,
+      quantidade: 1,
+      tamanhoSelecionado: selectedSize,
+    };
+
+    adicionarProduto(produtoParaCarrinho);
+    alert("Produto adicionado ao carrinho!");
+  };
+
+  return (
+    <div className="min-h-screen bg-neutral-100 font-sans">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 py-12 px-4 md:px-8">
+        <div className="flex flex-col gap-6 w-full md:w-1/2 items-center md:items-start">
+          <ProductImage src={produto.imagem} alt={produto.titulo} />
+          <ProductImage src={produto.imagemdesc} alt={`${produto.titulo} detalhe`} />
+        </div>
+
+        <div className="flex-1 flex flex-col justify-between">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-black text-neutral-900 mb-4 tracking-tight uppercase">
+              {produto.titulo}
+            </h1>
+            <p className="text-lg text-neutral-700 mb-6 max-w-xl">
+              {produto.desc}
+            </p>
+            <p className="text-2xl font-bold text-neutral-900 mb-8">
+              {produto.preco}
+            </p>
+
+            <div>
+              <label className="block mb-2 font-semibold text-neutral-800 text-lg">
+                Selecione o tamanho
+              </label>
+              <div className="grid grid-cols-5 gap-2 max-w-xs">
+                {produto.tamanhos.map((tamanho) => (
+                  <SizeButton
+                    key={tamanho}
+                    size={tamanho}
+                    isSelected={selectedSize === tamanho}
+                    onClick={() => setSelectedSize(tamanho)}
+                  />
+                ))}
+              </div>
+              {!selectedSize && (
+                <div className="text-xs text-red-500 mt-2">
+                  Selecione um tamanho
+                </div>
+              )}
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-4 mt-8">
+              <button
+                onClick={handleAddToCart}
+                className="flex-1 min-w-[100px] py-4 bg-black text-white rounded-full text-sm shadow-md hover:bg-neutral-800 transition uppercase tracking-wide"
+              >
+                Adicionar ao Carrinho
+              </button>
+              <button
+                onClick={() => navigate("/TelaCompra")}
+                className="flex-1 min-w-[100px] py-4 bg-white text-black border-2 border-black rounded-full text-sm shadow-md hover:bg-neutral-200 transition uppercase tracking-wide"
+              >
+                Comprar Agora
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="font-serif font-bold text-2xl text-center my-8 text-black">
+        <h1>Mais produtos que você pode gostar</h1>
+      </div>
+    </div>
+  );
+};
+
+export default Produto;

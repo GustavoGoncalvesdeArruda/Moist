@@ -1,46 +1,24 @@
-import { FaShoppingCart } from 'react-icons/fa';
-import { useCart } from '../../cartprovinder/CartContext';
+import { useCart } from "../cartprovinder/cartcontext";
+import { ShoppingCart } from "lucide-react";
 
-type CartButtonProps = {
+interface CartButtonProps {
   onClick: () => void;
-};
+}
 
 const CartButton = ({ onClick }: CartButtonProps) => {
-  const { itens } = useCart();
+  const { cart } = useCart();
 
-  const itemCount = itens.reduce((sum, item) => sum + item.quantidade, 0);
+  const itemCount = cart.reduce((sum, item) => sum + item.quantidade, 0);
 
   return (
     <button
       onClick={onClick}
-      className="
-        fixed top-2.5 right-5
-        bg-blue-500 text-white
-        border-none
-        p-2
-        rounded-full
-        cursor-pointer
-        z-[1000]
-        flex items-center justify-center
-        relative
-        hover:bg-blue-600
-        transition
-      "
+      className="fixed top-4 right-4 bg-black text-white p-3 rounded-full cursor-pointer z-[1000] flex items-center justify-center hover:bg-gray-800 transition-colors duration-200 shadow-lg"
+      aria-label="Abrir carrinho"
     >
-      <FaShoppingCart size={24} />
+      <ShoppingCart size={20} />
       {itemCount > 0 && (
-        <span
-          className="
-            absolute -top-1 -right-1
-            bg-red-800 text-white
-            rounded-full
-            px-2 py-0.5
-            text-[10px]
-            leading-none
-            flex items-center justify-center
-            transition-all
-          "
-        >
+        <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
           {itemCount}
         </span>
       )}

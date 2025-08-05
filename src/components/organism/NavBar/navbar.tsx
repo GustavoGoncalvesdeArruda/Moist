@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaSearch, FaShoppingCart } from 'react-icons/fa';
-import Carrinho from '../../features/Carrinho/carrinho';
+import { useState , useEffect } from "react";
+import { useNavigate , Link } from "react-router-dom";
+import { FaSearch , FaShoppingCart} from "react-icons/fa";
+import { produtos } from "../../features/produtos/produtos";
+import logo from '../../../image/logoB.png'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [carrinhoAberto, setCarrinhoAberto] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [suggestions, setSuggestions] = useState<string[]>([]);
 
   const navigate = useNavigate();
 
@@ -14,111 +16,151 @@ const Navbar = () => {
   const toggleCarrinho = () => setCarrinhoAberto(!carrinhoAberto);
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-
-    const handleScroll = () => {
-      lastScrollY = window.scrollY;
-    };
-
+    const handleScroll = () => {};
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    // Sugestões de produtos pelo nome
+    if (value.trim()) {
+      const filtered = produtos
+        .filter((produto) =>
+          produto.titulo.toLowerCase().includes(value.toLowerCase())
+        )
+        .map((produto) => produto.titulo)
+        .slice(0, 5);
+      setSuggestions(filtered);
+    } else {
+      setSuggestions([]);
+    }
   };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      navigate(`/produtos?search=${encodeURIComponent(searchTerm)}`);
-      setSearchTerm('');  // Limpa o campo após busca (opcional)
+      navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
+      setSearchTerm('');
+      setSuggestions([]);
     }
   };
 
-  const handleResetSearch = () => setSearchTerm('');
+  const handleResetSearch = () => {
+    setSearchTerm('');
+    setSuggestions([]);
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setSearchTerm('');
+    setSuggestions([]);
+    // Encontra o produto pelo título exato
+    const produto = produtos.find(
+      (p) => p.titulo.toLowerCase() === suggestion.toLowerCase()
+    );
+    if (produto) {
+      navigate(`/produto/${produto.id}`);
+    } else {
+      navigate(`/products?search=${encodeURIComponent(suggestion)}`);
+    }
+  };
 
   return (
     <div>
-      <nav className="fixed top-0 left-0 w-full h-16 z-10 font-sans bg-green-800 shadow-md flex justify-between items-center px-4 transition-transform duration-300">
+      <nav className="rounded-full font-serif fixed top-2 left-0 w-full h-16 z-20 italic bg-black shadow-md flex items-center px-4 transition-transform duration-300">
+      
 
-        {/* Logo */}
-        <img
-          src="/src/image/logo.png"
-          alt="Logo"
-          className="ml-2 w-10 cursor-pointer"
-          onClick={() => navigate('/paginainicial')}
-        />
-
-        {/* Barra de Pesquisa */}
-        <form
-          onSubmit={handleSearchSubmit}
-          className="relative flex-1 mx-5 max-w-[300px]"
-        >
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={handleInputChange}
-            placeholder="Buscar produtos..."
-            aria-label="Buscar produtos"
-            className="w-full py-2 pl-4 pr-10 text-sm rounded-full border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+        <div className="flex items-center">
+          <img
+            src={logo}
+            alt="Logo"
+            className="mr-4 h-20 w-20 cursor-pointer"
+            onClick={() => navigate('/homepage')}
           />
+        </div>
 
-          {searchTerm && (
-            <button
-              type="button"
-              onClick={handleResetSearch}
-              className="absolute right-8 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 text-sm"
-              aria-label="Limpar busca"
-            >
-              &times;
-            </button>
-          )}
+        <div className="flex-1 flex justify-center">
+          <div className="flex items-center space-x-8 text-white text-base italic">
+            <Link to="/about" className="hover:text-gray-300 transition-colors duration-300">
+              Sobre
+            </Link>
+            <Link to="/contact" className="hover:text-gray-300 transition-colors duration-300">
+              Suporte
+            </Link>
+            <Link to="/products" className="hover:text-gray-300 transition-colors duration-300">
+              Produtos
+            </Link>
+            <></>
+          </div>
+        </div>
 
-          <button
-            type="submit"
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
-            aria-label="Buscar"
+        <div className="flex items-center space-x-8">
+          <form
+            onSubmit={handleSearchSubmit}
+            className="relative w-40"
+            autoComplete="off"
           >
-            <FaSearch />
-          </button>
-        </form>
-
-        {/* Links e Carrinho */}
-        <div className="flex items-center space-x-8 mr-10 text-white text-sm">
-          <Link to="/paginainicial" className="hover:text-gray-300 transition-colors duration-300">
-            INÍCIO
-          </Link>
-          <Link to="/sobre" className="hover:text-gray-300 transition-colors duration-300">
-            SOBRE
-          </Link>
-          <Link to="/contato" className="hover:text-gray-300 transition-colors duration-300">
-            CONTATO
-          </Link>
-
-          {/* Botão Carrinho */}
-          <button 
-            onClick={toggleCarrinho} 
-            className="text-xl focus:outline-none" 
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleInputChange}
+              placeholder="Buscar..."
+              aria-label="Buscar produtos"
+              className="w-full py-1 pl-3 pr-8 text-sm rounded-3xl border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+            />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={handleResetSearch}
+                className="absolute right-7 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 text-xs"
+                aria-label="Limpar busca"
+              >
+                &times;
+              </button>
+            )}
+            <button
+              type="submit"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+              aria-label="Buscar"
+            >
+              <FaSearch size={13} />
+            </button>
+            
+            {suggestions.length > 0 && (
+              <ul className="absolute left-0 top-10 w-full bg-white border border-gray-200 rounded shadow z-50">
+                {suggestions.map((suggestion, idx) => (
+                  <li
+                    key={idx}
+                    className="px-3 py-1 hover:bg-gray-100 cursor-pointer text-black text-sm"
+                    onClick={() => handleSuggestionClick(suggestion)}
+                  >
+                    {suggestion}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </form>
+          <button
+            onClick={toggleCarrinho}
+            className="text-xl text-white focus:outline-none"
             aria-label="Abrir carrinho"
           >
             <FaShoppingCart />
           </button>
+          <button
+            onClick={toggleMenu}
+            className="text-white text-xl focus:outline-none"
+            aria-label="Abrir menu"
+          >
+            ☰
+          </button>
         </div>
-
-        {/* Menu Lateral Toggle */}
-        <button
-          onClick={toggleMenu}
-          className="mr-10 text-white text-xl focus:outline-none"
-          aria-label="Abrir menu"
-        >
-          ☰
-        </button>
       </nav>
 
-      {/* Menu Lateral */}
       {isMenuOpen && (
-        <div className="fixed top-0 left-0 h-full w-40 bg-green-800 text-white p-5 flex flex-col shadow-lg z-20 transition-transform duration-300">
+        <div className="rounded-lg font-serif fixed top-0 left-0 h-full w-40 bg-black text-white p-5 flex flex-col shadow-lg z-20 transition-transform">
           <button
             onClick={toggleMenu}
             className="text-xl mb-5 focus:outline-none"
@@ -126,32 +168,24 @@ const Navbar = () => {
           >
             &times;
           </button>
-          <Link to="/paginainicial" className="mb-4 text-xs hover:underline">
+          <Link to="/homepage" className="mb-4 text-xm text-3xl md:text-base">
             Página Inicial
           </Link>
-          <Link to="/sobre" className="mb-4 text-xs hover:underline">
+          <Link to="/about" className="mb-4 text-xm text-3xl md:text-base  ">
             Sobre Nós
           </Link>
-          <Link to="/contato" className="mb-4 text-xs hover:underline">
-            Contatos
+          <Link to="/contact" className="mb-4 text-xm text-3xl md:text-base  ">
+            Suporte
           </Link>
-          <Link to="/historia" className="mb-4 text-xs hover:underline">
+          <Link to="/history" className="mb-4 text-xm text-3xl md:text-base  ">
             Nossa História
           </Link>
-          <Link to="/tenispage" className="mb-4 text-xs hover:underline">
-            Tênis
-          </Link>
-          <Link to="/roupaspage" className="mb-4 text-xs hover:underline">
-            Roupas
+          <Link to="/products" className="mb-4 text-xm text-3xl md:text-base  ">
+            Produtos
           </Link>
         </div>
       )}
 
-      {/* Componente Carrinho */}
-      <Carrinho
-        isOpen={carrinhoAberto}
-        onClose={() => setCarrinhoAberto(false)}
-      />
     </div>
   );
 };
