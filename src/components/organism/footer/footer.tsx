@@ -5,16 +5,15 @@ import Mastercard from '../../../image/Payments/Mastercard.png'
 import Elo from '../../../image/Payments/Elo.png'
 import Boleto from '../../../image/Payments/Boleto.png'
 import Pix from '../../../image/Payments/Pix.png'
+import logob from  '../../../image/logoB.png'
 
 interface ComponentsFooterProps {
   descricao: string;
   imagem: string;
-  href: string;
 }
 
 const ComponentsFooter: React.FC<ComponentsFooterProps> = ({
   descricao,
-  href
 }) => {
   const navigate = useNavigate();
 
@@ -25,13 +24,13 @@ const ComponentsFooter: React.FC<ComponentsFooterProps> = ({
    
         <div onClick={() => navigate('/homepage')} className="flex items-center justify-center space-x-2">
           <a
-            href={href}
+            href={''}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center space-x-2 "
           >
             <img  
-              src={''}
+              src={logob}
               alt={descricao}
               className="w-80 h-80 object-contain"
             />
@@ -68,8 +67,7 @@ const ComponentsFooter: React.FC<ComponentsFooterProps> = ({
                 <div className="flex flex-col items-center">
               <a href="/homepage" className="text-sm text-white hover:underline">Página inicial</a>
               <a href="/products" className="text-sm text-white hover:underline">Todos os produtos</a>
-              <a href="/ukdrip" className="text-sm text-white hover:underline">Coleção de Inverno</a>
-              <a href="/tennis" className="text-sm text-white hover:underline">Coleção de Tênis</a>
+              <a href="/ukdrip" className="text-sm text-white hover:underline">Estilo UK</a>
             </div>
           </div>
 

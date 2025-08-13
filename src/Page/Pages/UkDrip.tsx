@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useRef , useEffect } from "react";
-import ComponentsCardColecao from "../../components/atoms/CardFullImg/Cardimgfull";
-import Section from "../../components/features/produtos/Section";
+import { useRef, useEffect } from "react";
+import ComponentsCardColecao from "../../components/props/CardFullImg/Cardimgfull";
+import Section from "../../components/molecules/produtos/Section"
 
 import UK from '../../image/UK.jpg';
 import Trapstar from '../../image/Trapstar.jpg';
@@ -16,24 +16,36 @@ const Ukdrip = () => {
   const section3Ref = useRef<HTMLDivElement>(null);
   const section4Ref = useRef<HTMLDivElement>(null);
 
-   useEffect(() => {
-     window.scrollTo(0, 0);
-   }, []);
- 
-   const scrollLeft = (sectionRef: React.RefObject<HTMLDivElement>) => {
-     if (sectionRef.current) {
-       sectionRef.current.scrollBy({ left: -400, behavior: 'smooth' });
-     }
-   };
- 
-   const scrollRight = (sectionRef: React.RefObject<HTMLDivElement>) => {
-     if (sectionRef.current) {
-       sectionRef.current.scrollBy({ left: 400, behavior: 'smooth' });
-     }
-   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const renderSection = (
+    ref: React.RefObject<HTMLDivElement>,
+    filtroNome: string
+  ) => (
+    <div className="relative w-full">
+      <div className="w-full max-w-screen-lg mx-auto overflow-hidden">
+        <div
+          className="flex gap-4 overflow-x-auto scroll-smooth scrollbar-thin scrollbar-thumb-gray-400 py-4"
+          ref={ref}
+        >
+          <Section
+            handleProductClick={(idProduto: string) => 
+              navigate(`/produto/${idProduto}`)
+            }
+            scrollLeft={() => (ref)}
+            scrollRight={() => (ref)}
+            scrollRef={ref}
+            filtroNome={filtroNome}
+          />
+        </div>
+      </div>
+    </div>
+  );
 
   return (
-    <div className="font-sans text-white min-h-screen flex flex-col">
+    <div className="font-sans bg-white min-h-screen">
       <div className="flex-1 space-y-16 py-10">
 
 
@@ -70,8 +82,8 @@ const Ukdrip = () => {
           <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={section1Ref}>
             <Section
               handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-              scrollLeft={() => scrollLeft(section1Ref)}
-              scrollRight={() => scrollRight(section1Ref)}
+              scrollLeft={() => (section1Ref)}
+              scrollRight={() => (section1Ref)}
               scrollRef={section1Ref}
               filtroNome="1of1"
             />
@@ -99,8 +111,8 @@ const Ukdrip = () => {
           <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={section2Ref}>
             <Section
               handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-              scrollLeft={() => scrollLeft(section2Ref)}
-              scrollRight={() => scrollRight(section2Ref)}
+              scrollLeft={() => (section2Ref)}
+              scrollRight={() => (section2Ref)}
               scrollRef={section2Ref}
               filtroNome="Trapstar"
             />
@@ -127,8 +139,8 @@ const Ukdrip = () => {
           <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={section3Ref}>
             <Section
               handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-              scrollLeft={() => scrollLeft(section3Ref)}
-              scrollRight={() => scrollRight(section3Ref)}
+              scrollLeft={() => (section3Ref)}
+              scrollRight={() => (section3Ref)}
               scrollRef={section3Ref}
               filtroNome="Corteiz"
             />
@@ -137,9 +149,10 @@ const Ukdrip = () => {
   
         <div onClick={() => navigate('/SynaWorld')}>
           <ComponentsCardColecao
-            titulo="Syna Wolrd"
+            titulo="Syna World"
             desc="Marca criada pelo Central Cee, e inspirado pelo estilo invernal londrino, essa coleção traz peso, conforto e identidade cultural."
             imagem={Syna}
+            botao="Conhecer parceria"
           />
         </div>
 
@@ -149,8 +162,8 @@ const Ukdrip = () => {
           <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={section4Ref}>
             <Section
               handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-              scrollLeft={() => scrollLeft(section4Ref)}
-              scrollRight={() => scrollRight(section4Ref)}
+              scrollLeft={() => (section4Ref)}
+              scrollRight={() => (section4Ref)}
               scrollRef={section4Ref}
               filtroNome="SynaWorld"
             />

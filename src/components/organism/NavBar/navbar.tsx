@@ -1,9 +1,9 @@
 import { useState , useEffect } from "react";
 import { useNavigate , Link } from "react-router-dom";
 import { FaSearch , FaShoppingCart} from "react-icons/fa";
-import { produtos } from "../../features/produtos/produtos";
+import { produtos } from "../../molecules/produtos/produtos";
 import logo from '../../../image/logoB.png'
-
+import Carrinho from "../../molecules/carrinho/carrinho"
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [carrinhoAberto, setCarrinhoAberto] = useState(false);
@@ -56,6 +56,7 @@ const Navbar = () => {
   const handleSuggestionClick = (suggestion: string) => {
     setSearchTerm('');
     setSuggestions([]);
+
     // Encontra o produto pelo título exato
     const produto = produtos.find(
       (p) => p.titulo.toLowerCase() === suggestion.toLowerCase()
@@ -144,7 +145,7 @@ const Navbar = () => {
           </form>
           <button
             onClick={toggleCarrinho}
-            className="text-xl text-white focus:outline-none"
+            className="text-xl text-white focus:outline-none hover:-scale-x-100 duration-150"
             aria-label="Abrir carrinho"
           >
             <FaShoppingCart />
@@ -186,6 +187,10 @@ const Navbar = () => {
         </div>
       )}
 
+      {carrinhoAberto && (
+        <Carrinho isOpen={carrinhoAberto} onClose={toggleCarrinho} />
+      )}
+      
     </div>
   );
 };

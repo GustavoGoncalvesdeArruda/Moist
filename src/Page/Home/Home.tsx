@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import BotaoPersonalizado from "../../components/atoms/Button/button";
+import BotaoPersonalizado from "../../components/props/Button/button";
 import logo from '../../image/logo.png';
 import home from '../../image/sportlife5.png'
 

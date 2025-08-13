@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useRef, useEffect } from "react";
-import ComponentsCardColecao from "../../components/atoms/CardFullImg/Cardimgfull";
-import ComponentsImagemCard from "../../components/atoms/CardImg/CardImagem";
-import Section from "../../components/features/produtos/Section";
-
+import ComponentsCardColecao from "../../components/props/CardFullImg/Cardimgfull";
+import ComponentsImagemCard from "../../components/props/CardImg/CardImagem";
+import Section from "../../components/molecules/produtos/Section";
 import Drill from '../../image/Ukdrill.jpg';
 import kidwild from '../../image/Kidwild.jpg';
 import Ice from '../../image/Ice.webp'
@@ -30,6 +29,7 @@ const HomePage = () => {
       sectionRef.current.scrollBy({ left: 400, behavior: 'smooth' });
     }
   };
+  
    return (
     <div className="font-serif bg-white text-white min-h-screen flex flex-col">
       <div className="flex-1">
@@ -49,7 +49,7 @@ const HomePage = () => {
         </h1>
 
 
-        <div className="flex flex-wrap justify-center items-center gap-8 p-2 my-10 w-full max-w-screen-lg mx-auto">
+        <div className="flex flex-row justify-center items-center gap-8 p-2 my-10 w-full max-w-screen-lg mx-auto">
        
           <div onClick={() => navigate('/produto/40')} role="button" tabIndex={0}>
             <ComponentsImagemCard
@@ -76,7 +76,7 @@ const HomePage = () => {
         <div className="flex justify-center my-8">
           <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={sectionRef}>
             <Section
-              handleProductClick={(idProduto: string) => navigate(`/products/${idProduto}`)}
+              handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
               scrollLeft={scrollLeft}
               scrollRight={scrollRight}
               scrollRef={sectionRef as React.RefObject<HTMLDivElement>}
@@ -98,10 +98,6 @@ const HomePage = () => {
           From the block to the spotlight
         </h1>
 
-        <div className='text-center my-8 text-black'>
-          <h1>the block to the spotlight</h1>
-        </div>
-
         {/* Seção de Acessórios */}
         <div className="flex flex-row justify-center items-center gap-8 p-2 my-10 w-full max-w-screen-lg mx-auto overflow-x-auto">
           <div onClick={() => navigate('/products')} role="button" tabIndex={0} className="flex-shrink-0">
@@ -112,12 +108,12 @@ const HomePage = () => {
               filtroCategoria="Joias"
             />
           </div>
-          <div onClick={() => navigate('/products')} role="button" tabIndex={0} className="flex-shrink-0">
+          <div onClick={() => navigate('/produto')} role="button" tabIndex={0} className="flex-shrink-0">
             <ComponentsImagemCard
               titulo="Caps"
               desc="Acessórios especiais para cabela."
               imagem={Touca}
-              filtroCategoria="Acessórios"
+              filtroCategoria="Jóias"
             />
           </div>
         </div>
@@ -126,11 +122,11 @@ const HomePage = () => {
         <div className="flex justify-center my-8">
           <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={sectionRef}>
             <Section
-              handleProductClick={(idProduto: string) => navigate(`/products/${idProduto}`)}
+              handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
               scrollLeft={scrollLeft}
               scrollRight={scrollRight}
-              scrollRef={sectionRef as React.RefObject<HTMLDivElement>}
-              filtroCategoria="Acesssório"
+                  scrollRef={sectionRef as React.RefObject<HTMLDivElement>}
+              filtroCategoria="Acessórios"
             />
           </div>
         </div>

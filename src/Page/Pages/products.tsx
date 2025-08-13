@@ -2,8 +2,8 @@
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { useState , useEffect } from "react";
-import { produtos } from "../../components/features/produtos/produtos";
-import BotaoPersonalizado from "../../components/atoms/Button/button";
+import { produtos } from "../../components/molecules/produtos/produtos";
+import BotaoPersonalizado from "../../components/props/Button/button";
 
 const Products = () => {
   const navigate = useNavigate();

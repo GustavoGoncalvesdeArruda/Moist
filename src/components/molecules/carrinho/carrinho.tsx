@@ -1,17 +1,32 @@
 import { useCart } from "../cartprovinder/cartcontext";
 import { useNavigate } from "react-router-dom";
 import { Trash2, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface CarrinhoProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+
 const Carrinho = ({ isOpen, onClose }: CarrinhoProps) => {
   const { cart, removerProduto, limparCarrinho } = useCart();
   const navigate = useNavigate();
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (isOpen) {
+      setIsAnimating(true);
+    }
+  }, [isOpen]);
+
+  if (!isOpen && !isAnimating) return null;
+
+  const handleTransitionEnd = () => {
+    if (!isOpen) {
+      setIsAnimating(false);
+    }
+  };
 
   const totalValue = cart.reduce(
     (total, item) => total + item.preco * item.quantidade,
@@ -20,14 +35,23 @@ const Carrinho = ({ isOpen, onClose }: CarrinhoProps) => {
 
   return (
     <>
-      {/* Overlay */}
+      {/* Overlay with fade effect */}
       <div
-        className="fixed inset-0 bg-black bg-opacity-50 z-[1999]"
+        className={`fixed inset-0 bg-black transition-opacity duration-300 ${
+          isOpen ? 'opacity-50' : 'opacity-0'
+        } z-[1999]`}
         onClick={onClose}
       />
 
-      {/* Cart Panel */}
-      <aside className="fixed top-0 right-0 w-80 h-full bg-white shadow-2xl p-6 z-[2000] flex flex-col rounded-l-2xl border-l border-gray-200">
+      {/* Cart Panel with slide effect */}
+          <aside
+          className={`fixed top-0 right-0 w-80 h-full bg-white shadow-2xl p-6 z-[2000] 
+            flex flex-col rounded-l-2xl border-l border-gray-200
+            transform transition-transform duration-300 ease-in-out
+            ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          onTransitionEnd={handleTransitionEnd}
+        >
+
         <header className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold text-gray-900">Seu Carrinho</h2>
           <button

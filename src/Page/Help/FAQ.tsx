@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Sportlife from '../../../image/sportlife3.png';
-import Logo from '../../../image/logo.png';
+import Sportlife from "../../image/sportlife2.png"
+import Sportlife2 from "../../image/sportlife5.png"
 
 const perguntas = [
   {
@@ -47,20 +47,14 @@ const FAQ = () => {
       <div className="flex flex-row w-full max-w">
    
         {/* Imagens à esquerda */}
-        <div className="flex flex-col items-center justify-center w-1/2 pr-8 border-r">
-        
-          <img src={Sportlife} alt="" className="w-24 h-24" />
-          <h1 className="text-3xl md:text-2xl font-black text-neutral-900 mb-4   tracking-tight uppercase text-center">Moist</h1>
-
+        <div className="flex-col items-center justify-center w-1/2">
           <img
-            src={Logo}
+            src={Sportlife2}
             alt=""
-            className="w-40 max-w-full mb-4 shadow"
           />
           <img
-            src={''}
+            src={Sportlife}
             alt=""
-            className="w-full max-w-full shadow"
           />
         </div>
 

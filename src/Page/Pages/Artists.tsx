@@ -1,5 +1,4 @@
-import ComponentsCardColecao from "../../components/atoms/CardFullImg/Cardimgfull";
-
+import ComponentsCardColecao from '../../components/props/CardFullImg/Cardimgfull';
 import kid from '../../image/Kidwild2.jpg';
 import Nemzzz from '../../image/Nemzzz.jpg';
 import UK from '../../image/Ukdrill.jpg';

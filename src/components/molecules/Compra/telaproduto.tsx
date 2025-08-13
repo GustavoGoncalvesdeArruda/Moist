@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../cartprovinder/cartcontext";
+import Qualidade from "../../../image/Qualidade.png";
+import Qualidade2 from "../../../image/Qualidade2.png";
+import Section from "../produtos/Section"
 
 interface ProdutoType {
   id: string;
   titulo: string;
   preco: string;
-  imagem: string;   
+  imagem: string;
   imagemdesc: string;
   desc: string;
   tamanhos: string[];
@@ -16,8 +19,6 @@ interface ProdutoType {
 interface ProdutoProps {
   produto: ProdutoType;
 }
-
-window.scrollTo(0, 0);
 
 const ProductImage = ({ src, alt }: { src: string; alt: string }) => (
   <div className="w-full aspect-square bg-white rounded-2xl shadow-lg flex items-center justify-center overflow-hidden">
@@ -59,6 +60,27 @@ const Produto = ({ produto }: ProdutoProps) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  // Crie uma ref para cada seção
+  const roupasSectionRef = useRef<HTMLDivElement | null>(null);
+  const tenisSectionRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // Agora as funções aceitam refs que podem ser nulas (React padrão)
+  const scrollLeft = (ref: React.RefObject<HTMLDivElement | null>) => {
+    if (ref.current) {
+      ref.current.scrollBy({ left: -400, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = (ref: React.RefObject<HTMLDivElement | null>) => {
+    if (ref.current) {
+      ref.current.scrollBy({ left: 400, behavior: "smooth" });
+    }
+  };
+
   const handleAddToCart = () => {
     if (!selectedSize) {
       alert("Por favor, selecione um tamanho.");
@@ -99,12 +121,8 @@ const Produto = ({ produto }: ProdutoProps) => {
             <h1 className="text-4xl md:text-5xl font-black text-neutral-900 mb-4 tracking-tight uppercase">
               {produto.titulo}
             </h1>
-            <p className="text-lg text-neutral-700 mb-6 max-w-xl">
-              {produto.desc}
-            </p>
-            <p className="text-2xl font-bold text-neutral-900 mb-8">
-              {produto.preco}
-            </p>
+            <p className="text-lg text-neutral-700 mb-6 max-w-xl">{produto.desc}</p>
+            <p className="text-2xl font-bold text-neutral-900 mb-8">{produto.preco}</p>
 
             <div>
               <label className="block mb-2 font-semibold text-neutral-800 text-lg">
@@ -121,9 +139,7 @@ const Produto = ({ produto }: ProdutoProps) => {
                 ))}
               </div>
               {!selectedSize && (
-                <div className="text-xs text-red-500 mt-2">
-                  Selecione um tamanho
-                </div>
+                <div className="text-xs text-red-500 mt-2">Selecione um tamanho</div>
               )}
             </div>
 
@@ -141,15 +157,64 @@ const Produto = ({ produto }: ProdutoProps) => {
                 Comprar Agora
               </button>
             </div>
+
+            {/*Qualidade*/}
+            <div>
+              <h1 className="text-2xl font-bold text-center my-8 text-black">
+                Qualidade Garantida
+              </h1>
+              <div className="flex">
+                <img src={Qualidade} alt="" className="w-12" />
+                <img src={Qualidade2} alt="" className="w-20" />
+              </div>
+              {/*Descrição*/}
+              <p className="text-start text-neutral-600 mt-2 justify-center">
+                Nossos produtos são desenvolvidos com atenção a cada detalhe, unindo estilo, conforto e durabilidade. Utilizamos materiais de alta qualidade e processos de fabricação responsáveis, garantindo peças que resistem ao tempo e ao uso diário.
+                ✅ Acabamento Premium: Costuras reforçadas e cortes precisos.
+                ✅ Materiais Selecionados: Tecidos, couros e sintéticos escolhidos por sua resistência e toque agradável.
+                ✅ Conforto que você sente: Modelagens pensadas para o seu dia a dia.
+                ✅ Durabilidade Comprovada: Produtos feitos para acompanhar seu ritmo por muito mais tempo.
+                Invista em produtos que entregam mais do que aparência — entregam confiança.
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="font-serif font-bold text-2xl text-center my-8 text-black">
-        <h1>Mais produtos que você pode gostar</h1>
+      {/* Recomendados */}
+      {/* Roupa */}
+      <h1 className="text-2xl font-bold text-center my-8 text-black">Explore nossas Roupas</h1>
+      <div className="flex justify-center my-8">
+        <div
+          className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400"
+          ref={roupasSectionRef}
+        >                                                            
+          <Section
+            handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
+            scrollLeft={() => scrollLeft(roupasSectionRef)}
+            scrollRight={() => scrollRight(roupasSectionRef)}
+            filtroCategoria="Roupa"
+          />
+        </div>
+      </div>
+
+      {/* Tênis */}
+      <h1 className="text-2xl font-bold text-center my-8 text-black">Explore nossos Tênis</h1>
+      <div className="flex justify-center my-8">
+        <div
+          className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400"
+          ref={tenisSectionRef}
+        >
+          <Section
+            handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
+            scrollLeft={() => scrollLeft(tenisSectionRef)}
+            scrollRight={() => scrollRight(tenisSectionRef)}
+            filtroCategoria="Tênis"
+          />
+        </div>
       </div>
     </div>
-  );
+  );s
 };
 
 export default Produto;
