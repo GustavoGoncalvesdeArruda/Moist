@@ -70,9 +70,8 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="rounded-full font-serif fixed top-2 left-0 w-full h-16 z-20 italic bg-black shadow-md flex items-center px-4 transition-transform duration-300">
+      <nav className="font-serif fixed left-0 w-full h-16 z-20 italic bg-black shadow-md flex items-center px-4 transition-transform duration-300">
       
-
         <div className="flex items-center">
           <img
             src={logo}
