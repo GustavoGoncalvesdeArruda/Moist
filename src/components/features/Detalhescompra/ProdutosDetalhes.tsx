@@ -20,7 +20,7 @@ const ComponentsDetalhe: React.FC<ComponentsDetalheProps> = ({
   return (
     <div className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
       <Link
-        to={`/produto/${idProduto}`}
+        to={`/products/${idProduto}`}
         className="block p-4 space-y-4 hover:bg-gray-50 transition"
       >
         <div>

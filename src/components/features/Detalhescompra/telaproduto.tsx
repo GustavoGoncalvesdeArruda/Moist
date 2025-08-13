@@ -17,6 +17,8 @@ interface ProdutoProps {
   produto: ProdutoType;
 }
 
+window.scrollTo(0, 0);
+
 const ProductImage = ({ src, alt }: { src: string; alt: string }) => (
   <div className="w-full aspect-square bg-white rounded-2xl shadow-lg flex items-center justify-center overflow-hidden">
     <img
@@ -133,7 +135,7 @@ const Produto = ({ produto }: ProdutoProps) => {
                 Adicionar ao Carrinho
               </button>
               <button
-                onClick={() => navigate("/TelaCompra")}
+                onClick={() => navigate("/checkout")}
                 className="flex-1 min-w-[100px] py-4 bg-white text-black border-2 border-black rounded-full text-sm shadow-md hover:bg-neutral-200 transition uppercase tracking-wide"
               >
                 Comprar Agora

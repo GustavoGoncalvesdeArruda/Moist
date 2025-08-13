@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import BotaoPersonalizado from "../../components/atoms/Button/button";
+import logo from '../../image/logo.png';
+import home from '../../image/sportlife5.png'
 
 interface HomeProps {
   className?: string;
@@ -15,15 +17,18 @@ const Home: React.FC<HomeProps> = () => {
   return (
     <main
       className="font-serif min-h-screen flex justify-center items-center bg-gray-100 relative"
-    >
+      style={{
+        backgroundImage: `url(${home})`,
+        backgroundSize: 'cover',
+      }}>
 
 
       <div className="absolute inset-0 bg-black bg-opacity-50" />
 
-      <div className="relative z-10 bg-white bg-opacity-95 p-12 rounded-2xl shadow-xl max-w-md mx-4">
+      <div className="relative z-10 bg-white bg-opacity-80 p-12 rounded-2xl shadow-xl max-w-md mx-4">
         <div className="flex flex-col items-center space-y-6">
           <img 
-            src={''} 
+            src={logo} 
             alt="Moist Logo" 
             className="w-24 h-24 object-contain"
             loading="eager"

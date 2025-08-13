@@ -51,7 +51,7 @@ const HomePage = () => {
 
         <div className="flex flex-wrap justify-center items-center gap-8 p-2 my-10 w-full max-w-screen-lg mx-auto">
        
-          <div onClick={() => navigate('/produto/15')} role="button" tabIndex={0}>
+          <div onClick={() => navigate('/produto/40')} role="button" tabIndex={0}>
             <ComponentsImagemCard
               titulo="Air Max Portal"
               desc="Air Max Portal é um modelo icônico da Nike. Com uma combinação de estilo moderno e tecnologia avançada, ele se destaca tanto em performance quanto em moda."
@@ -59,7 +59,7 @@ const HomePage = () => {
               filtroCategoria="Tênis"
             />
           </div>
-          <div onClick={() => navigate('/produto/8')} role="button" tabIndex={0}>
+          <div onClick={() => navigate('/produto/41')} role="button" tabIndex={0}>
             <ComponentsImagemCard
               titulo="Air Max DN 8"
               desc="Air Max DN 8 é um modelo da Nike que combina estilo e conforto, com uma silhueta moderna e detalhes marcantes. Ideal para quem busca um visual ousado e autêntico."
@@ -76,7 +76,7 @@ const HomePage = () => {
         <div className="flex justify-center my-8">
           <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={sectionRef}>
             <Section
-              handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
+              handleProductClick={(idProduto: string) => navigate(`/products/${idProduto}`)}
               scrollLeft={scrollLeft}
               scrollRight={scrollRight}
               scrollRef={sectionRef as React.RefObject<HTMLDivElement>}
@@ -104,7 +104,7 @@ const HomePage = () => {
 
         {/* Seção de Acessórios */}
         <div className="flex flex-row justify-center items-center gap-8 p-2 my-10 w-full max-w-screen-lg mx-auto overflow-x-auto">
-          <div onClick={() => navigate('/produto/joias')} role="button" tabIndex={0} className="flex-shrink-0">
+          <div onClick={() => navigate('/products')} role="button" tabIndex={0} className="flex-shrink-0">
             <ComponentsImagemCard
               titulo="Ice"
               desc="Ice de qualidade"
@@ -112,12 +112,12 @@ const HomePage = () => {
               filtroCategoria="Joias"
             />
           </div>
-          <div onClick={() => navigate('/produto/acessorios')} role="button" tabIndex={0} className="flex-shrink-0">
+          <div onClick={() => navigate('/products')} role="button" tabIndex={0} className="flex-shrink-0">
             <ComponentsImagemCard
               titulo="Caps"
               desc="Acessórios especiais para cabela."
               imagem={Touca}
-              filtroCategoria="Cabelo"
+              filtroCategoria="Acessórios"
             />
           </div>
         </div>
@@ -126,11 +126,11 @@ const HomePage = () => {
         <div className="flex justify-center my-8">
           <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={sectionRef}>
             <Section
-              handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
+              handleProductClick={(idProduto: string) => navigate(`/products/${idProduto}`)}
               scrollLeft={scrollLeft}
               scrollRight={scrollRight}
               scrollRef={sectionRef as React.RefObject<HTMLDivElement>}
-              filtroCategoria="Acessórios"
+              filtroCategoria="Acesssório"
             />
           </div>
         </div>

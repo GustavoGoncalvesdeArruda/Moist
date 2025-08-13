@@ -1,20 +1,22 @@
 import './index.css';
 import { useParams } from 'react-router-dom';
 import { produtos } from './components/features/produtos/produtos';
+
+
 import Produto from './components/features/Detalhescompra/telaproduto';
+
+import { CartProvider } from './components/features/cartprovinder/cartcontext';
+
 import { BrowserRouter, useLocation, Routes, Route } from "react-router-dom";
 import Home from "./Page/Main/Home";
 import HomePage from "./Page/Main/HomePage";
 import ComponentsFooter from "./components/organism/footer/footer";
-
-
-
 import Navbar from './components/organism/navbar/navbar';
 import Products from './Page/Pages/products';
-import About from './Page/Institutional/About';
-import History from './Page/Institutional/History';
-import Contact from './Page/Help/Contact';
-import FAQ from './Page/Help/FAQ';
+import About from './Page/Pages/Institutional/About';
+import History from './Page/Pages/Institutional/History';
+import Contact from './Page/Pages/Help/Contact';
+import FAQ from './Page/Pages/Help/FAQ';
 import Artist from './Page/Pages/Artists';
 import SynaWorld from './Page/Pages/SynaWorld';
 import Ukdrip from './Page/Pages/UkDrip';
@@ -37,7 +39,7 @@ function AppContent() {
   const isHomePage = location.pathname === '/';
 
   return (
-    <>
+     <CartProvider>
       {/* Navbar sempre visível */}
       <Navbar />
 
@@ -63,7 +65,7 @@ function AppContent() {
         imagem={''}
         href=''
       />
-    </>
+    </CartProvider>
   );
 }
 

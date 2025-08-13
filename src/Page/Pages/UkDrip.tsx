@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import { useRef , useEffect } from "react";
 import ComponentsCardColecao from "../../components/atoms/CardFullImg/Cardimgfull";
+import Section from "../../components/features/produtos/Section";
 
 import UK from '../../image/UK.jpg';
 import Trapstar from '../../image/Trapstar.jpg';
@@ -9,8 +11,26 @@ import of from '../../image/1of1.png'
 
 const Ukdrip = () => {
   const navigate = useNavigate();
+  const section1Ref = useRef<HTMLDivElement>(null);
+  const section2Ref = useRef<HTMLDivElement>(null);
+  const section3Ref = useRef<HTMLDivElement>(null);
+  const section4Ref = useRef<HTMLDivElement>(null);
 
-  window.scrollTo({ top: 0, left: 0 });
+   useEffect(() => {
+     window.scrollTo(0, 0);
+   }, []);
+ 
+   const scrollLeft = (sectionRef: React.RefObject<HTMLDivElement>) => {
+     if (sectionRef.current) {
+       sectionRef.current.scrollBy({ left: -400, behavior: 'smooth' });
+     }
+   };
+ 
+   const scrollRight = (sectionRef: React.RefObject<HTMLDivElement>) => {
+     if (sectionRef.current) {
+       sectionRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+     }
+   };
 
   return (
     <div className="font-sans text-white min-h-screen flex flex-col">
@@ -45,7 +65,18 @@ const Ukdrip = () => {
             </div>
           </div>
         </div>
-
+        
+       <div className="flex justify-center my-8">
+          <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={section1Ref}>
+            <Section
+              handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
+              scrollLeft={() => scrollLeft(section1Ref)}
+              scrollRight={() => scrollRight(section1Ref)}
+              scrollRef={section1Ref}
+              filtroNome="1of1"
+            />
+          </div>
+        </div>
 
      
         <div className="flex justify-center items-center px-4">
@@ -64,7 +95,17 @@ const Ukdrip = () => {
           </div>
         </div>
 
-
+           <div className="flex justify-center my-8">
+          <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={section2Ref}>
+            <Section
+              handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
+              scrollLeft={() => scrollLeft(section2Ref)}
+              scrollRight={() => scrollRight(section2Ref)}
+              scrollRef={section2Ref}
+              filtroNome="Trapstar"
+            />
+          </div>
+        </div>
  
         <div className="flex justify-center items-center px-4">
           <div className="flex flex-row shadow-2xl overflow-hidden w-full max-w-4xl bg-white">
@@ -79,10 +120,20 @@ const Ukdrip = () => {
                 A Corteiz é uma marca de streetwear britânica fundada em 2017 por Clint Ogbenna, conhecido como Clint 419. A marca ganhou destaque por seu logotipo de Alcatraz e por suas ações de marketing exclusivas, como lançamentos surpresa e interação direta com o público nas ruas. A Corteiz cultiva uma base de fãs leais, conectando o estilo de vida londrino com suas estratégias de marketing
               </p>
             </div>
-          </div>
+           </div>
         </div>
 
-
+       <div className="flex justify-center my-8">
+          <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={section3Ref}>
+            <Section
+              handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
+              scrollLeft={() => scrollLeft(section3Ref)}
+              scrollRight={() => scrollRight(section3Ref)}
+              scrollRef={section3Ref}
+              filtroNome="Corteiz"
+            />
+          </div>
+        </div>
   
         <div onClick={() => navigate('/SynaWorld')}>
           <ComponentsCardColecao
@@ -94,8 +145,20 @@ const Ukdrip = () => {
 
         <h1 className='text-2xl font-bold text-center my-8 text-black'>
           STAY REAL. STAY WORLDWIDE
-        </h1>
+        </h1>   <div className="flex justify-center my-8">
+          <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={section4Ref}>
+            <Section
+              handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
+              scrollLeft={() => scrollLeft(section4Ref)}
+              scrollRight={() => scrollRight(section4Ref)}
+              scrollRef={section4Ref}
+              filtroNome="SynaWorld"
+            />
+          </div>
+        </div>
       </div>
+
+
     </div>
   );
 };
