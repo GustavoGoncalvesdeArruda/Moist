@@ -438,10 +438,10 @@ export const produtos: Produto[] = [
   },
    {
     id: '42',
-    titulo: '1of1 Camiseta Estampada',
+    titulo: 'Camisera 1of1 Exclusivist Back from the Realm',
     preco: 'R$ 149,99',
-    imagem: 'https://down-br.img.susercontent.com/file/br-11134207-7r98o-m4jk0ge10lkl04',
-    imagemdesc: 'https://down-br.img.susercontent.com/file/sg-11134201-7rff8-m3ndrgd5glb9ba',
+    imagem: 'https://s.hipnoise.com.br/product/2025/05/exclus-07.jpg',
+    imagemdesc: 'https://s.hipnoise.com.br/product/2025/05/exclus-07b.jpg',
     desc: 'Camiseta com estampa exclusiva 1of1.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],

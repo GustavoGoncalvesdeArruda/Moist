@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../cartprovinder/cartcontext";
 import Qualidade from "../../../image/Qualidade.png";
@@ -60,26 +60,9 @@ const Produto = ({ produto }: ProdutoProps) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  // Crie uma ref para cada seção
-  const roupasSectionRef = useRef<HTMLDivElement | null>(null);
-  const tenisSectionRef = useRef<HTMLDivElement | null>(null);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // Agora as funções aceitam refs que podem ser nulas (React padrão)
-  const scrollLeft = (ref: React.RefObject<HTMLDivElement | null>) => {
-    if (ref.current) {
-      ref.current.scrollBy({ left: -400, behavior: "smooth" });
-    }
-  };
-
-  const scrollRight = (ref: React.RefObject<HTMLDivElement | null>) => {
-    if (ref.current) {
-      ref.current.scrollBy({ left: 400, behavior: "smooth" });
-    }
-  };
 
   const handleAddToCart = () => {
     if (!selectedSize) {
@@ -160,7 +143,7 @@ const Produto = ({ produto }: ProdutoProps) => {
 
             {/*Qualidade*/}
             <div>
-              <h1 className="text-2xl font-bold text-center my-8 text-black">
+              <h1 className="text-2xl font-serif font-semibold text-center my-8 text-black">
                 Qualidade Garantida
               </h1>
               <div className="flex">
@@ -168,12 +151,12 @@ const Produto = ({ produto }: ProdutoProps) => {
                 <img src={Qualidade2} alt="" className="w-20" />
               </div>
               {/*Descrição*/}
-              <p className="text-start text-neutral-600 mt-2 justify-center">
-                Nossos produtos são desenvolvidos com atenção a cada detalhe, unindo estilo, conforto e durabilidade. Utilizamos materiais de alta qualidade e processos de fabricação responsáveis, garantindo peças que resistem ao tempo e ao uso diário.
-                ✅ Acabamento Premium: Costuras reforçadas e cortes precisos.
-                ✅ Materiais Selecionados: Tecidos, couros e sintéticos escolhidos por sua resistência e toque agradável.
-                ✅ Conforto que você sente: Modelagens pensadas para o seu dia a dia.
-                ✅ Durabilidade Comprovada: Produtos feitos para acompanhar seu ritmo por muito mais tempo.
+              <p className="text-clip font-serif text-start text-neutral-600 mt-2 justify-center">
+                Nossos produtos são desenvolvidos com atenção a cada detalhe, unindo estilo, conforto e durabilidade. Utilizamos materiais de alta qualidade e processos de fabricação responsáveis, garantindo peças que resistem ao tempo e ao uso diário.<br/>
+                ✅ Acabamento Premium: Costuras reforçadas e cortes precisos.<br/>
+                ✅ Materiais Selecionados: Tecidos, couros e sintéticos escolhidos por sua resistência e toque agradável.<br/>
+                ✅ Conforto que você sente: Modelagens pensadas para o seu dia a dia.<br/>
+                ✅ Durabilidade Comprovada: Produtos feitos para acompanhar seu ritmo por muito mais tempo.<br/>
                 Invista em produtos que entregam mais do que aparência — entregam confiança.
               </p>
             </div>
@@ -183,38 +166,28 @@ const Produto = ({ produto }: ProdutoProps) => {
 
       {/* Recomendados */}
       {/* Roupa */}
-      <h1 className="text-2xl font-bold text-center my-8 text-black">Explore nossas Roupas</h1>
-      <div className="flex justify-center my-8">
-        <div
-          className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400"
-          ref={roupasSectionRef}
-        >                                                            
+      <div className="min-h-screen bg-neutral-100 font-sans">
+          {/* ... JSX da parte de cima da página ... */}
+          
+          {/* Recomendados */}
+          {/* Roupa */}
+          <h1 className="text-2xl font-bold text-center my-8 text-black">Explore nossas Roupas</h1>
+          {/* A chamada ao Section agora é muito mais limpa */}
           <Section
             handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-            scrollLeft={() => scrollLeft(roupasSectionRef)}
-            scrollRight={() => scrollRight(roupasSectionRef)}
             filtroCategoria="Roupa"
           />
-        </div>
-      </div>
-
-      {/* Tênis */}
-      <h1 className="text-2xl font-bold text-center my-8 text-black">Explore nossos Tênis</h1>
-      <div className="flex justify-center my-8">
-        <div
-          className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400"
-          ref={tenisSectionRef}
-        >
+    
+          {/* Tênis */}
+          <h1 className="text-2xl font-bold text-center my-8 text-black">Explore nossos Tênis</h1>
+          {/* A div que envolvia o Section foi removida por ser desnecessária */}
           <Section
             handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-            scrollLeft={() => scrollLeft(tenisSectionRef)}
-            scrollRight={() => scrollRight(tenisSectionRef)}
             filtroCategoria="Tênis"
           />
         </div>
       </div>
-    </div>
-  );s
+  );
 };
 
 export default Produto;

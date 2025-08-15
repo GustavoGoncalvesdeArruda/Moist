@@ -1,33 +1,33 @@
-import { useEffect } from "react";
+import { useRef } from "react"; // Removido useEffect, pois não é mais necessário aqui
 import { produtos } from "./produtos";
 
-
+// 1. A interface foi simplificada. Removemos as props de scroll.
 interface SectionProps {
   handleProductClick: (idProduto: string) => void;
-  scrollLeft: () => void;
-  scrollRight: () => void;
-  scrollRef: React.RefObject<HTMLDivElement>;
   filtroCategoria?: string;
   filtroNome?: string;
 }
 
 const Section: React.FC<SectionProps> = ({
   handleProductClick,
-  scrollLeft,
-  scrollRight,
-  scrollRef,
   filtroCategoria = '',
   filtroNome = '',
 }) => {
-  // O useEffect para rolar para o topo pode ser removido daqui,
-  // pois o componente pai já faz isso. Manter pode causar rolagens inesperadas.
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
+  // 2. Criamos uma ref local, exclusiva para este componente.
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    window.scrollTo(0 , 0);
-  }, [])
+  // 3. As funções de scroll agora vivem dentro do componente e usam a ref local.
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -400, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 400, behavior: "smooth" });
+    }
+  };
   
   const produtosFiltrados = produtos.filter((produto) => {
     const matchCategoria =
@@ -41,12 +41,10 @@ const Section: React.FC<SectionProps> = ({
   });
 
   return (
-    // O contêiner principal agora tem a classe 'relative' para posicionar os botões.
     <div className="relative my-10">
-      {/* Botão Esquerda */}
+      {/* 4. O onClick agora chama as funções locais, que funcionam corretamente. */}
       <button
         onClick={scrollLeft}
-        // Assegura que o botão fique visível acima dos produtos.
         className="absolute left-2 top-1/2 -translate-y-1/2 z-10 text-black bg-white hover:bg-black hover:text-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center transition-all duration-200"
         aria-label="Rolar para a esquerda"
       >
@@ -55,10 +53,8 @@ const Section: React.FC<SectionProps> = ({
         </svg>
       </button>
 
-      {/* Botão Direita */}
       <button
         onClick={scrollRight}
-        // Assegura que o botão fique visível acima dos produtos.
         className="absolute right-2 top-1/2 -translate-y-1/2 z-10 text-black bg-white hover:bg-black hover:text-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center transition-all duration-200"
         aria-label="Rolar para a direita"
       >
@@ -67,26 +63,22 @@ const Section: React.FC<SectionProps> = ({
         </svg>
       </button>
 
-      {/* A referência de rolagem está corretamente aplicada a este contêiner. */}
+      {/* 5. A ref local é anexada ao único container que precisa rolar. */}
       <div
-        ref={scrollRef}
-        // Aumentar o padding horizontal (px-12) garante que os produtos não fiquem escondidos sob os botões.
+        ref={scrollContainerRef}
         className="flex gap-4 px-12 overflow-x-auto scroll-smooth scrollbar-hide"
-        // Adicionei a classe scrollbar-hide para uma aparência mais limpa, mas você pode usar as classes do scrollbar-thin se preferir.
       >
         {produtosFiltrados.map((produto) => (
           <div
             key={produto.id}
             onClick={() => handleProductClick(produto.id)}
-            // Ajustei as dimensões para uma melhor apresentação.
             className="flex-shrink-0 w-56 bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer group transition-all duration-300 transform hover:shadow-xl"
           >
             <img
               src={produto.imagem}
               alt={produto.titulo}
-              className="w-full h-72"
+              className="w-full h-72 object-cover" // object-cover evita distorção da imagem
             />
-            {/* Opcional: Adicionar um título e preço dentro do card */}
             <div className="p-4">
                 <h3 className="text-lg font-bold truncate">{produto.titulo}</h3>
                 <p className="text-md text-gray-600">{produto.preco}</p>

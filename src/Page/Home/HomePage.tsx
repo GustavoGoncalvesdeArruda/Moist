@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useRef, useEffect } from "react";
+import { useEffect } from "react";
 import ComponentsCardColecao from "../../components/props/CardFullImg/Cardimgfull";
 import ComponentsImagemCard from "../../components/props/CardImg/CardImagem";
 import Section from "../../components/molecules/produtos/Section";
@@ -12,23 +12,11 @@ import DN from '../../image/DN8.avif'
 
 const HomePage = () => {
  const navigate = useNavigate();
-  const sectionRef = useRef<HTMLDivElement>(null);
-
+ 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const scrollLeft = () => {
-    if (sectionRef.current) {
-      sectionRef.current.scrollBy({ left: -400, behavior: 'smooth' });
-    }
-  };
-
-  const scrollRight = () => {
-    if (sectionRef.current) {
-      sectionRef.current.scrollBy({ left: 400, behavior: 'smooth' });
-    }
-  };
   
    return (
     <div className="font-serif bg-white text-white min-h-screen flex flex-col">
@@ -73,17 +61,12 @@ const HomePage = () => {
           Rhyme hard. Dress harder.
         </h1>
 
-        <div className="flex justify-center my-8">
-          <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={sectionRef}>
-            <Section
-              handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-              scrollLeft={scrollLeft}
-              scrollRight={scrollRight}
-              scrollRef={sectionRef as React.RefObject<HTMLDivElement>}
-              filtroCategoria="Roupa"
-            />
-          </div>
-        </div>
+       {/*Roupas*/}
+       <Section
+        handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
+        filtroCategoria="Roupa"
+       />
+     </div>
 
         <div onClick={() => navigate('/ukdrip')} role="button" tabIndex={0}>
           <ComponentsCardColecao
@@ -100,7 +83,7 @@ const HomePage = () => {
 
         {/* Seção de Acessórios */}
         <div className="flex flex-row justify-center items-center gap-8 p-2 my-10 w-full max-w-screen-lg mx-auto overflow-x-auto">
-          <div onClick={() => navigate('/products')} role="button" tabIndex={0} className="flex-shrink-0">
+          <div onClick={() => navigate('/products?categoria=Jóias')} role="button" tabIndex={0} className="flex-shrink-0">
             <ComponentsImagemCard
               titulo="Ice"
               desc="Ice de qualidade"
@@ -108,7 +91,8 @@ const HomePage = () => {
               filtroCategoria="Joias"
             />
           </div>
-          <div onClick={() => navigate('/produto')} role="button" tabIndex={0} className="flex-shrink-0">
+          
+          <div onClick={() => navigate('/products?categoria=Acessórios')} role="button" tabIndex={0} className="flex-shrink-0">
             <ComponentsImagemCard
               titulo="Caps"
               desc="Acessórios especiais para cabela."
@@ -118,21 +102,12 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* Section de produtos */}
-        <div className="flex justify-center my-8">
-          <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={sectionRef}>
-            <Section
-              handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-              scrollLeft={scrollLeft}
-              scrollRight={scrollRight}
-                  scrollRef={sectionRef as React.RefObject<HTMLDivElement>}
-              filtroCategoria="Acessórios"
-            />
-          </div>
-        </div>
-
-      </div>
-    </div>
+        {/*Acessórios*/}
+       <Section
+        handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
+        filtroCategoria="Acessórios"
+       />
+     </div>
   );
 };
 export default HomePage;
