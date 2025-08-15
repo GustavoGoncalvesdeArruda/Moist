@@ -64,12 +64,14 @@ const Produto = ({ produto }: ProdutoProps) => {
     window.scrollTo(0, 0);
   }, []);
 
+  //Alerta de Tamanho
   const handleAddToCart = () => {
     if (!selectedSize) {
       alert("Por favor, selecione um tamanho.");
       return;
     }
 
+  //Preço
     const precoNumerico = parseFloat(
       produto.preco.replace("R$", "").replace(".", "").replace(",", ".")
     );
@@ -79,6 +81,7 @@ const Produto = ({ produto }: ProdutoProps) => {
       return;
     }
 
+    //Campo de envio para carrinho
     const produtoParaCarrinho = {
       id: parseInt(produto.id, 10),
       nome: produto.titulo,
@@ -107,6 +110,8 @@ const Produto = ({ produto }: ProdutoProps) => {
             <p className="text-lg text-neutral-700 mb-6 max-w-xl">{produto.desc}</p>
             <p className="text-2xl font-bold text-neutral-900 mb-8">{produto.preco}</p>
 
+
+            {/*Seleção de Tamanho*/}
             <div>
               <label className="block mb-2 font-semibold text-neutral-800 text-lg">
                 Selecione o tamanho
@@ -126,6 +131,7 @@ const Produto = ({ produto }: ProdutoProps) => {
               )}
             </div>
 
+            {/*Botões*/}
             <div className="flex flex-col md:flex-row gap-4 mt-8">
               <button
                 onClick={handleAddToCart}
@@ -146,12 +152,14 @@ const Produto = ({ produto }: ProdutoProps) => {
               <h1 className="text-2xl font-serif font-semibold text-center my-8 text-black">
                 Qualidade Garantida
               </h1>
+
               <div className="flex">
                 <img src={Qualidade} alt="" className="w-12" />
                 <img src={Qualidade2} alt="" className="w-20" />
               </div>
+
               {/*Descrição*/}
-              <p className="text-clip font-serif text-start text-neutral-600 mt-2 justify-center">
+              <p className="text-clip font-serif text-xm  text-neutral-600 mt-2 justify-center">
                 Nossos produtos são desenvolvidos com atenção a cada detalhe, unindo estilo, conforto e durabilidade. Utilizamos materiais de alta qualidade e processos de fabricação responsáveis, garantindo peças que resistem ao tempo e ao uso diário.<br/>
                 ✅ Acabamento Premium: Costuras reforçadas e cortes precisos.<br/>
                 ✅ Materiais Selecionados: Tecidos, couros e sintéticos escolhidos por sua resistência e toque agradável.<br/>
@@ -159,34 +167,29 @@ const Produto = ({ produto }: ProdutoProps) => {
                 ✅ Durabilidade Comprovada: Produtos feitos para acompanhar seu ritmo por muito mais tempo.<br/>
                 Invista em produtos que entregam mais do que aparência — entregam confiança.
               </p>
+
             </div>
           </div>
         </div>
       </div>
 
-      {/* Recomendados */}
-      {/* Roupa */}
+      {/* Recomendados: Roupa */}
       <div className="min-h-screen bg-neutral-100 font-sans">
-          {/* ... JSX da parte de cima da página ... */}
-          
-          {/* Recomendados */}
-          {/* Roupa */}
-          <h1 className="text-2xl font-bold text-center my-8 text-black">Explore nossas Roupas</h1>
-          {/* A chamada ao Section agora é muito mais limpa */}
+  
+        <h1 className="text-2xl font-bold text-center my-8 text-black">Explore nossas Roupas</h1>
           <Section
             handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-            filtroCategoria="Roupa"
+             filtroCategoria="Roupa"
           />
     
           {/* Tênis */}
-          <h1 className="text-2xl font-bold text-center my-8 text-black">Explore nossos Tênis</h1>
-          {/* A div que envolvia o Section foi removida por ser desnecessária */}
+        <h1 className="text-2xl font-bold text-center my-8 text-black">Explore nossos Tênis</h1>
           <Section
             handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
             filtroCategoria="Tênis"
           />
-        </div>
       </div>
+    </div>
   );
 };
 

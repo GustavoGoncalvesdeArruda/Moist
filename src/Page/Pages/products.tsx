@@ -7,7 +7,7 @@ import BotaoPersonalizado from "../../components/props/Button/button";
 
 const Products = () => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams(); // <-- adicionado
+  const [searchParams] = useSearchParams(); 
   window.scrollTo(0, 0);
 
   // Filtros
@@ -126,6 +126,7 @@ const Products = () => {
           ))}
         </div>
 
+        {/*Botão de retorno a página inicial*/}
         <div className="text-center mb-12">
           <BotaoPersonalizado
             texto="Página inicial"

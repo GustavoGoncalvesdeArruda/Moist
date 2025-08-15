@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useRef, useEffect } from "react";
+import { useEffect } from "react";
 import ComponentsCardColecao from "../../components/props/CardFullImg/Cardimgfull";
 import Section from "../../components/molecules/produtos/Section"
 
@@ -11,38 +11,11 @@ import of from '../../image/1of1.png'
 
 const Ukdrip = () => {
   const navigate = useNavigate();
-  const section1Ref = useRef<HTMLDivElement>(null);
-  const section2Ref = useRef<HTMLDivElement>(null);
-  const section3Ref = useRef<HTMLDivElement>(null);
-  const section4Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const renderSection = (
-    ref: React.RefObject<HTMLDivElement>,
-    filtroNome: string
-  ) => (
-    <div className="relative w-full">
-      <div className="w-full max-w-screen-lg mx-auto overflow-hidden">
-        <div
-          className="flex gap-4 overflow-x-auto scroll-smooth scrollbar-thin scrollbar-thumb-gray-400 py-4"
-          ref={ref}
-        >
-          <Section
-            handleProductClick={(idProduto: string) => 
-              navigate(`/produto/${idProduto}`)
-            }
-            scrollLeft={() => (ref)}
-            scrollRight={() => (ref)}
-            scrollRef={ref}
-            filtroNome={filtroNome}
-          />
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <div className="font-sans bg-white min-h-screen">
@@ -79,15 +52,12 @@ const Ukdrip = () => {
         </div>
         
        <div className="flex justify-center my-8">
-          <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={section1Ref}>
-            <Section
-              handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-              scrollLeft={() => (section1Ref)}
-              scrollRight={() => (section1Ref)}
-              scrollRef={section1Ref}
-              filtroNome="1of1"
-            />
-          </div>
+       
+        <h1 className="text-2xl font-bold text-center my-8 text-black">Explore nossas Roupas</h1>
+          <Section
+            handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
+             filtroCategoria="1of1"
+          />
         </div>
 
      
@@ -107,16 +77,11 @@ const Ukdrip = () => {
           </div>
         </div>
 
-           <div className="flex justify-center my-8">
-          <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={section2Ref}>
-            <Section
-              handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-              scrollLeft={() => (section2Ref)}
-              scrollRight={() => (section2Ref)}
-              scrollRef={section2Ref}
-              filtroNome="Trapstar"
-            />
-          </div>
+        <div className="flex justify-center my-8">
+          <Section
+            handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
+             filtroCategoria="Trapstar"
+          />
         </div>
  
         <div className="flex justify-center items-center px-4">
@@ -136,17 +101,13 @@ const Ukdrip = () => {
         </div>
 
        <div className="flex justify-center my-8">
-          <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={section3Ref}>
-            <Section
-              handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-              scrollLeft={() => (section3Ref)}
-              scrollRight={() => (section3Ref)}
-              scrollRef={section3Ref}
-              filtroNome="Corteiz"
-            />
-          </div>
+          <Section
+            handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
+             filtroCategoria="Corteiz"
+          />
         </div>
   
+        {/*SynaWorld*/}
         <div onClick={() => navigate('/SynaWorld')}>
           <ComponentsCardColecao
             titulo="Syna World"
@@ -154,25 +115,20 @@ const Ukdrip = () => {
             imagem={Syna}
             botao="Conhecer parceria"
           />
-        </div>
 
         <h1 className='text-2xl font-bold text-center my-8 text-black'>
           STAY REAL. STAY WORLDWIDE
-        </h1>   <div className="flex justify-center my-8">
-          <div className="w-full max-w-screen-lg overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400" ref={section4Ref}>
-            <Section
-              handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-              scrollLeft={() => (section4Ref)}
-              scrollRight={() => (section4Ref)}
-              scrollRef={section4Ref}
-              filtroNome="SynaWorld"
-            />
-          </div>
+        </h1>
+        
+        <div className="flex justify-center my-8">
+          <Section
+            handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
+             filtroNome="Trapstar"
+          />
         </div>
       </div>
-
-
     </div>
+  </div>
   );
 };
 

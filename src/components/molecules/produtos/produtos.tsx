@@ -24,6 +24,7 @@ export const produtos: Produto[] = [
       categoria: '',
       tamanhos: [],
     */
+   
     {
       id: '1',
       titulo: 'Nike Air Max Plus Drift',

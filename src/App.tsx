@@ -15,7 +15,7 @@ import History from './Page/Institutional/History';
 import FAQ from "./Page/Help/FAQ"
 import Contact from "./Page/Help/Contact"
 
-import Produto from "./components/molecules/Compra/telaproduto"
+import Produto from "./components/molecules/Compra/Tela"
 import ComponentsFooter from "./components/organism/footer/footer";
 import Navbar from './components/organism/navbar/navbar';
 

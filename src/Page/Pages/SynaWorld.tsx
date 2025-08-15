@@ -6,6 +6,7 @@ const SynaWorld = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  //Conteúdo
   const items = [
     {
       titulo: '2025',
@@ -26,10 +27,10 @@ const SynaWorld = () => {
       <div className="w-full max-w-3xl bg-white shadow-lg border border-gray-200 rounded-md">
        
 
+        {/*Cabeçalho*/}
         <header className="flex flex-col items-center px-6 pt-8 pb-4 border-b border-black">
-          <span className="bg-black text-white font-black text-3xl px-4 py-1 rounded mb-4 tracking-tight" style={{ fontFamily: 'Arial Black, Arial, sans-serif' }}>
-          </span>
-
+    
+          {/*Título*/}
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 leading-tight text-center" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
             Nossa mais nova parceria com a Syna World
           </h1>
@@ -40,16 +41,16 @@ const SynaWorld = () => {
 
         </header>
 
-     
+        {/*Imagem*/}
         <div className="w-full flex justify-center bg-neutral-50 border-b border-gray-200 py-6">
           <img 
             src={Syna}
-            alt="Imagem de destaque da Moist"  
+            alt="Imagem de capa"  
             className="w-full max-w-full h-full object-cover rounded"
           />
         </div>
     
-
+        {/*Estrutura do Artigo*/}
         <div className="p-6 flex flex-col items-center">
           {items.map((item, index) => (
             <div key={index} className="mb-8 max-w-2xl w-full">
