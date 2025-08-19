@@ -14,6 +14,7 @@ interface ProdutoType {
   desc: string;
   tamanhos: string[];
   categoria: string;
+  marca:string;
 }
 
 interface ProdutoProps {
@@ -173,22 +174,16 @@ const Produto = ({ produto }: ProdutoProps) => {
         </div>
       </div>
 
-      {/* Recomendados: Roupa */}
-      <div className="min-h-screen bg-neutral-100 font-sans">
+      {/* Recomendados*/}
   
-        <h1 className="text-2xl font-bold text-center my-8 text-black">Explore nossas Roupas</h1>
+        <h1 className="font-serif text-2xl font-bold text-center my-8 text-black">Talvez você goste</h1>
+
           <Section
             handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-             filtroCategoria="Roupa"
+            filtroCategoria={produto.categoria}
+            filtroMarca={produto.marca}
           />
     
-          {/* Tênis */}
-        <h1 className="text-2xl font-bold text-center my-8 text-black">Explore nossos Tênis</h1>
-          <Section
-            handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-            filtroCategoria="Tênis"
-          />
-      </div>
     </div>
   );
 };

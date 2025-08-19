@@ -5,13 +5,13 @@ import { produtos } from "./produtos";
 interface SectionProps {
   handleProductClick: (idProduto: string) => void;
   filtroCategoria?: string;
-  filtroNome?: string;
+  filtroMarca?: string;
 }
 
 const Section: React.FC<SectionProps> = ({
   handleProductClick,
   filtroCategoria = '',
-  filtroNome = '',
+  filtroMarca = '',
 }) => {
   // 2. Criamos uma ref local, exclusiva para este componente.
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
@@ -34,14 +34,14 @@ const Section: React.FC<SectionProps> = ({
       !filtroCategoria || filtroCategoria === 'Todos'
         ? true
         : produto.categoria === filtroCategoria;
-    const matchNome = filtroNome
-      ? produto.titulo.toLowerCase().includes(filtroNome.toLowerCase())
+    const matchNome = filtroMarca
+      ? produto.marca.toLowerCase().includes(filtroMarca.toLowerCase())
       : true;
     return matchCategoria && matchNome;
   });
 
   return (
-    <div className="relative my-10">
+    <div className="font-serif relative my-10">
       {/* 4. O onClick agora chama as funções locais, que funcionam corretamente. */}
       <button
         onClick={scrollLeft}

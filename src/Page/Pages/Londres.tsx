@@ -50,15 +50,12 @@ const Ukdrip = () => {
             </div>
           </div>
         </div>
-        
-       <div className="flex justify-center my-8">
        
-        <h1 className="text-2xl font-bold text-center my-8 text-black">Explore nossas Roupas</h1>
           <Section
             handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-             filtroCategoria="1of1"
+             filtroMarca="1of1"
           />
-        </div>
+     
 
      
         <div className="flex justify-center items-center px-4">
@@ -77,12 +74,10 @@ const Ukdrip = () => {
           </div>
         </div>
 
-        <div className="flex justify-center my-8">
           <Section
             handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-             filtroCategoria="Trapstar"
+             filtroMarca="Trapstar"
           />
-        </div>
  
         <div className="flex justify-center items-center px-4">
           <div className="flex flex-row shadow-2xl overflow-hidden w-full max-w-4xl bg-white">
@@ -100,12 +95,10 @@ const Ukdrip = () => {
            </div>
         </div>
 
-       <div className="flex justify-center my-8">
           <Section
             handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-             filtroCategoria="Corteiz"
+             filtroMarca="Corteiz"
           />
-        </div>
   
         {/*SynaWorld*/}
         <div onClick={() => navigate('/SynaWorld')}>
@@ -119,14 +112,14 @@ const Ukdrip = () => {
         <h1 className='text-2xl font-bold text-center my-8 text-black'>
           STAY REAL. STAY WORLDWIDE
         </h1>
-        
-        <div className="flex justify-center my-8">
+      </div>
+
+      
           <Section
             handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-             filtroNome="Trapstar"
+            filtroMarca="SynaWorld"
           />
-        </div>
-      </div>
+          
     </div>
   </div>
   );

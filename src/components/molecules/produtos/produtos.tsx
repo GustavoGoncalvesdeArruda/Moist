@@ -9,6 +9,7 @@ export interface Produto {
     desc: string;
     categoria: string,
     tamanhos: string[];
+    marca: string;
 }
 
 
@@ -23,18 +24,20 @@ export const produtos: Produto[] = [
       desc: '',
       categoria: '',
       tamanhos: [],
+      marca: '',
     */
    
-    {
-      id: '1',
-      titulo: 'Nike Air Max Plus Drift',
-      preco: 'R$ 1.399,00',
-      imagem: 'https://imgnike-a.akamaihd.net/768x768/027876IEA1.jpg',
-      imagemdesc: 'https://imgnike-a.akamaihd.net/768x768/027876IEA4.jpg',
-      desc: 'O Nike Air Max Plus Drift é a combinação perfeita entre tecnologia e estilo para o seu dia a dia. Com amortecimento Air Max, proporciona conforto duradouro mesmo nas atividades mais intensas. Seu design moderno chama atenção e valoriza qualquer look, seja para treino ou para passeios urbanos. A sola oferece excelente tração, garantindo segurança a cada passo. Disponível em vários tamanhos, é ideal para quem busca performance sem abrir mão da estética.',
-      categoria: 'Tênis',
-      tamanhos: ['36','37','38','39','40','41','42','43'],
-    },
+  {
+    id: '1',
+    titulo: 'Nike Air Max Plus Drift',
+    preco: 'R$ 1.399,00',
+    imagem: 'https://imgnike-a.akamaihd.net/768x768/027876IEA1.jpg',
+    imagemdesc: 'https://imgnike-a.akamaihd.net/768x768/027876IEA4.jpg',
+    desc: 'O Nike Air Max Plus Drift é a combinação perfeita entre tecnologia e estilo para o seu dia a dia. Com amortecimento Air Max, proporciona conforto duradouro mesmo nas atividades mais intensas. Seu design moderno chama atenção e valoriza qualquer look, seja para treino ou para passeios urbanos. A sola oferece excelente tração, garantindo segurança a cada passo. Disponível em vários tamanhos, é ideal para quem busca performance sem abrir mão da estética.',
+    categoria: 'Tênis',
+    tamanhos: ['36','37','38','39','40','41','42','43'],
+    marca: 'Nike',
+  },
   {
     id: '2',
     titulo: 'Corteiz Hoodie Alcatraz',
@@ -44,6 +47,7 @@ export const produtos: Produto[] = [
     desc: 'O moletom Corteiz Hoodie Alcatraz une conforto e estilo em uma peça versátil para qualquer estação. Fabricado com materiais de alta qualidade, ele oferece maciez e durabilidade excepcionais. Seu corte clássico combina facilmente com diferentes estilos, perfeito para o uso diário ou para momentos de lazer. A estampa discreta acrescenta personalidade sem exageros. Disponível em diversos tamanhos para atender todos os gostos.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: 'Corteiz',
   },
   {
     id: '3',
@@ -54,6 +58,7 @@ export const produtos: Produto[] = [
     desc: 'As calças cargo Corteiz são sinônimo de resistência e praticidade para quem vive na correria do dia a dia. Com bolsos amplos e reforçados, são perfeitas para carregar itens essenciais com facilidade. O tecido durável garante longa vida útil, além de conforto e liberdade de movimento. Seu design moderno complementa qualquer look casual ou streetwear. Uma escolha inteligente para quem valoriza funcionalidade e estilo.',
     categoria: 'Roupa',
     tamanhos: ['38', '40', '42', '44'],
+    marca: 'Corteiz',
   },
   {
     id: '4',
@@ -64,6 +69,7 @@ export const produtos: Produto[] = [
     desc: 'A camiseta Corteiz Islandy Baby traz um design moderno com logo estampado na frente, ideal para destacar sua personalidade. Produzida com algodão de alta qualidade, proporciona conforto e frescor durante todo o dia. Seu caimento perfeito e acabamento cuidadoso garantem uma peça durável e estilosa. Fácil de combinar, ela é ótima para diversas ocasiões, do casual ao despojado. Disponível em tamanhos que se adaptam a diferentes perfis.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: 'Corteiz',
   },
   {
     id: '5',
@@ -74,6 +80,7 @@ export const produtos: Produto[] = [
     desc: 'O boné Corteiz 4-Star Trucker é um acessório indispensável para quem quer estilo e praticidade. Com ajuste snapback na parte traseira, oferece encaixe perfeito para diversos tamanhos. Seu design moderno e a qualidade do material garantem resistência e conforto durante o uso. Ideal para complementar looks urbanos ou esportivos, protege contra o sol com muito charme. Um toque final que faz toda a diferença no visual.',
     categoria: 'Acessórios',
     tamanhos: ['Branco', 'Preto'],
+    marca: 'Corteiz',
   },
   {
     id: '6',
@@ -84,6 +91,7 @@ export const produtos: Produto[] = [
     desc: 'Conjunto de agasalho Corteiz para máxima performance.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: 'Corteiz',
   },
   {
     id: '7',
@@ -94,6 +102,7 @@ export const produtos: Produto[] = [
     desc: 'Jaqueta leve e resistente 1of1 para dias de vento.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: '1of1',
   },
   {
     id: '8',
@@ -104,6 +113,7 @@ export const produtos: Produto[] = [
     desc: 'Boné estilo trucker com logo 1of1.',
     categoria: 'Roupa',
     tamanhos: ['Único'],
+    marca: '1of1',
   },
   {
     id: '9',
@@ -114,6 +124,7 @@ export const produtos: Produto[] = [
     desc: 'Calça jogger confortável e estilosa da 1of1.',
     categoria: 'Roupa',
     tamanhos: ['38', '40', '42', '44'],
+    marca: '1of1',
   },
   {
     id: '10',
@@ -124,6 +135,7 @@ export const produtos: Produto[] = [
     desc: 'Mochila resistente para uso diário com design 1of1.',
     categoria: 'Roupa',
     tamanhos: ['Único'],
+    marca: '1of1',
   },
 
   {
@@ -135,6 +147,7 @@ export const produtos: Produto[] = [
     desc: 'Tênis leve para corrida com tecnologia SynaWorld.',
     categoria: 'Roupa',
     tamanhos: ['36','37','38','39','40','41','42','43'],
+    marca: 'SynWorld',
   },
   {
     id: '12',
@@ -145,6 +158,7 @@ export const produtos: Produto[] = [
     desc: 'Jaqueta corta vento resistente para uso esportivo.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: 'SynaWorld',
   },
   {
     id: '13',
@@ -154,7 +168,8 @@ export const produtos: Produto[] = [
     imagemdesc: 'https://ae01.alicdn.com/kf/Sc57ca5f6af0c4d22b3c1d34ea9b3ab9cR.jpg',
     desc: 'Boné snapback estiloso da SynaWorld.',
     categoria: 'Roupa',
-    tamanhos: ['Único'],
+    tamanhos: ['Único'], 
+    marca: 'SynaWorld',
   },
   {
     id: '14',
@@ -165,6 +180,7 @@ export const produtos: Produto[] = [
     desc: 'Camiseta Dry Fit para treino e performance.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: 'SynaWorld',
   },
   {
     id: '15',
@@ -175,6 +191,7 @@ export const produtos: Produto[] = [
     desc: 'Legging confortável para atividades físicas.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G'],
+    marca: 'SynaWorld',
   },
   {
     id: '16',
@@ -185,6 +202,7 @@ export const produtos: Produto[] = [
     desc: 'Camiseta com estampa tradicional Ed Hardy.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: '1of1',
   },
   {
     id: '17',
@@ -195,6 +213,7 @@ export const produtos: Produto[] = [
     desc: 'Jaqueta de couro estilosa com detalhes tattoo.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: '1of1',
   },
   {
     id: '18',
@@ -205,6 +224,7 @@ export const produtos: Produto[] = [
     desc: 'Boné com logo Ed Hardy em estilo trucker.',
     categoria: 'Roupa',
     tamanhos: ['Único'],
+    marca: 'SynaWorld',
   },
   {
     id: '19',
@@ -215,6 +235,7 @@ export const produtos: Produto[] = [
     desc: 'Calça jeans confortável e resistente Ed Hardy.',
     categoria: 'Acessórios',
     tamanhos: ['38', '40', '42', '44'],
+    marca: '1of1',
   },
   {
     id: '20',
@@ -225,6 +246,7 @@ export const produtos: Produto[] = [
     desc: 'Tênis casual com design marcante Ed Hardy.',
     categoria: 'Roupa',
     tamanhos: ['36','37','38','39','40','41','42','43'],
+    marca: 'Trapstar',
   },
 
   {
@@ -236,6 +258,7 @@ export const produtos: Produto[] = [
     desc: 'Camiseta básica confortável Corteiz.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: 'Trapstar',
   },
   {
     id: '22',
@@ -246,6 +269,7 @@ export const produtos: Produto[] = [
     desc: 'Regata estilosa para o dia a dia.',
     categoria: 'Acessórios',
     tamanhos: ['P', 'M', 'G'],
+    marca: 'Trapstar',
   },
   {
     id: '23',
@@ -256,6 +280,7 @@ export const produtos: Produto[] = [
     desc: 'Meias para alta performance.',
     categoria: 'Jóias',
     tamanhos: ['Único'],
+    marca: 'UziStore',
   },
   {
     id: '24',
@@ -266,6 +291,7 @@ export const produtos: Produto[] = [
     desc: 'Mochila com design Ed Hardy.',
     categoria: 'Jóias',
     tamanhos: ['Único'],
+    marca: 'UziStore',
   },
   {
     id: '25',
@@ -276,7 +302,8 @@ export const produtos: Produto[] = [
     desc: 'Calça jeans slim Corteiz.',
     categoria: 'Jóias',
     tamanhos: ['38', '40', '42', '44'],
-  },
+    marca: 'UziStore',
+},
   {
     id: '26',
     titulo: 'Corrente Cuban Miami 2.0 14mm',
@@ -286,6 +313,7 @@ export const produtos: Produto[] = [
     desc: 'Jaqueta jeans estilosa 1of1.',
     categoria: 'Jóias',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: 'UziStore',
   },
   {
     id: '27',
@@ -296,6 +324,7 @@ export const produtos: Produto[] = [
     desc: 'Tênis casual confortável.',
     categoria: 'Acessórios',
     tamanhos: ['36','37','38','39','40','41','42','43'],
+    marca: 'SynaWorld',
   },
   {
     id: '28',
@@ -306,6 +335,7 @@ export const produtos: Produto[] = [
     desc: 'Camiseta manga longa Ed Hardy.',
     categoria: 'Acessórios',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: 'SynaWorld',
   },
   {
     id: '29',
@@ -316,6 +346,7 @@ export const produtos: Produto[] = [
     desc: 'Calça cargo slim 1of1.',
     categoria: 'Acessórios',
     tamanhos: ['38', '40', '42', '44'],
+    marca: 'SynaWorld',
   },
   {
     id: '30',
@@ -326,6 +357,7 @@ export const produtos: Produto[] = [
     desc: 'Moletom com capuz SynaWorld.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: 'Corteiz',
   },
   {
     id: '31',
@@ -336,7 +368,9 @@ export const produtos: Produto[] = [
     desc: 'Relógio com design inspirado em tatuagens Ed Hardy.',
     categoria: 'Roupa',
     tamanhos: ['Único'],
-  },
+    marca: 'Corteiz',
+    },
+
   {
     id: '32',
     titulo: 'Corteiz Talisma Rosa',
@@ -346,6 +380,7 @@ export const produtos: Produto[] = [
     desc: 'Jaqueta bomber Corteiz com design moderno.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: 'Corteiz',
   },
   {
     id: '33',
@@ -356,6 +391,7 @@ export const produtos: Produto[] = [
     desc: 'Tênis street style 1of1.',
     categoria: 'Roupa',
     tamanhos: ['36','37','38','39','40','41','42','43'],
+    marca: 'Corteiz',
   },
   {
     id: '34',
@@ -366,7 +402,8 @@ export const produtos: Produto[] = [
     desc: 'Meias para atividades intensas.',
     categoria: 'Tênis',
     tamanhos: ['Único'],
-  },
+    marca: 'Nike',
+},
   {
     id: '35',
     titulo: 'Air Max 95 OG',
@@ -376,6 +413,7 @@ export const produtos: Produto[] = [
     desc: 'Tênis casual com detalhes Ed Hardy.',
     categoria: 'Tênis',
     tamanhos: ['36','37','38','39','40','41','42','43'],
+    marca: 'Nike',
   },
   {
     id: '36',
@@ -386,6 +424,7 @@ export const produtos: Produto[] = [
     desc: 'Camiseta oversized confortável.',
     categoria: 'Tênis',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: 'Nike',
   },
   {
     id: '37',
@@ -396,6 +435,7 @@ export const produtos: Produto[] = [
     desc: 'Camisa polo estilosa para ocasiões casuais.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: 'Trapstar',
   },
   {
     id: '38',
@@ -406,6 +446,7 @@ export const produtos: Produto[] = [
     desc:'',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: '1of1',
   },
    {
     id: '39',
@@ -416,6 +457,7 @@ export const produtos: Produto[] = [
     desc: 'Boné estilo trucker Corteiz.',
     categoria: 'Tênis',
     tamanhos: ['Único'],
+    marca: 'Nike',
   },
   {
     id: '40',
@@ -426,7 +468,8 @@ export const produtos: Produto[] = [
     desc: '',
     categoria: 'Tênis',
     tamanhos: ['39','40','41','42','43'],
-  },
+    marca: 'Nike',
+},
   {
     id: '41',
     titulo: 'Nike Air Max DN8',
@@ -436,6 +479,7 @@ export const produtos: Produto[] = [
     desc: '',
     categoria: 'Tênis',
     tamanhos: ['39','40','41','42','43'],
+    marca: 'Nike',
   },
    {
     id: '42',
@@ -446,6 +490,7 @@ export const produtos: Produto[] = [
     desc: 'Camiseta com estampa exclusiva 1of1.',
     categoria: 'Roupa',
     tamanhos: ['P', 'M', 'G', 'GG'],
+    marca: '1of1',
   },
 
 

@@ -22,7 +22,7 @@ import Navbar from './components/organism/navbar/navbar';
 import Products from './Page/Pages/products';
 import Artist from './Page/Pages/Artists';
 import SynaWorld from './Page/Pages/SynaWorld';
-import Ukdrip from './Page/Pages/UkDrip';
+import Ukdrip from './Page/Pages/Londres';
 
 import logob from './image/logoB.png'
 

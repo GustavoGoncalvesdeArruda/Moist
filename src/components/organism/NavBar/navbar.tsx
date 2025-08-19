@@ -4,6 +4,7 @@ import { FaSearch , FaShoppingCart} from "react-icons/fa";
 import { produtos } from "../../molecules/produtos/produtos";
 import logo from '../../../image/logoB.png'
 import Carrinho from "../../molecules/carrinho/carrinho"
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [carrinhoAberto, setCarrinhoAberto] = useState(false);
@@ -71,7 +72,9 @@ const Navbar = () => {
   return (
     <div>
       <nav className="font-serif fixed left-0 w-full h-16 z-20 italic bg-black shadow-md flex items-center px-4 transition-transform duration-300">
-      
+
+        {/*Logo*/}
+
         <div className="flex items-center">
           <img
             src={logo}
@@ -80,6 +83,8 @@ const Navbar = () => {
             onClick={() => navigate('/homepage')}
           />
         </div>
+
+        {/*Link da Navbar*/}
 
         <div className="flex-1 flex justify-center">
           <div className="flex items-center space-x-8 text-white text-base italic">
@@ -142,6 +147,8 @@ const Navbar = () => {
               </ul>
             )}
           </form>
+
+          {/*Botão do Carrinho*/}
           <button
             onClick={toggleCarrinho}
             className="text-xl text-white focus:outline-none hover:-scale-x-100 duration-150"
@@ -149,6 +156,8 @@ const Navbar = () => {
           >
             <FaShoppingCart />
           </button>
+
+          {/*Botão do Menu*/}
           <button
             onClick={toggleMenu}
             className="text-white text-xl focus:outline-none"
@@ -159,8 +168,11 @@ const Navbar = () => {
         </div>
       </nav>
 
+
+      {/*Menu aberto*/}
+
       {isMenuOpen && (
-        <div className="rounded-lg font-serif fixed top-0 left-0 h-full w-40 bg-black text-white p-5 flex flex-col shadow-lg z-20 transition-transform">
+        <div className="font-serif fixed top-0 left-0 h-full w-40 bg-black text-white p-5 flex flex-col z-20">
           <button
             onClick={toggleMenu}
             className="text-xl mb-5 focus:outline-none"

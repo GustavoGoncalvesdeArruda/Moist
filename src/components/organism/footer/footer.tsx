@@ -67,7 +67,7 @@ const ComponentsFooter: React.FC<ComponentsFooterProps> = ({
                 <div className="flex flex-col items-center">
               <a href="/homepage" className="text-sm text-white hover:underline">Página inicial</a>
               <a href="/products" className="text-sm text-white hover:underline">Todos os produtos</a>
-              <a href="/ukdrip" className="text-sm text-white hover:underline">Estilo UK</a>
+              <a href="/ukdrip" className="text-sm text-white hover:underline">Estilo Londrino</a>
             </div>
           </div>
 
