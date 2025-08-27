@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useParams} from "react-router-dom";
 import { useCart } from "../cartprovinder/cartcontext";
 import Qualidade from "../../../image/Qualidade.png";
 import Qualidade2 from "../../../image/Qualidade2.png";
@@ -60,10 +60,13 @@ const Produto = ({ produto }: ProdutoProps) => {
   const { adicionarProduto } = useCart();
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { idProduto } = useParams(); 
 
   useEffect(() => {
+    // OU quando o `idProduto` (da URL) mudar, o que acontece quando você navega para um novo produto.
     window.scrollTo(0, 0);
-  }, []);
+    setSelectedSize(null); // Opcional: Limpar o tamanho selecionado ao navegar para um novo produto
+  }, [idProduto]); // Adicione idProduto como dependência para que o efeito seja re-executado quando a URL mudar.
 
   //Alerta de Tamanho
   const handleAddToCart = () => {

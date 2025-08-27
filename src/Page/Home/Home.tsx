@@ -16,7 +16,7 @@ const Home: React.FC<HomeProps> = () => {
 
   return (
     <main
-      className="font-serif min-h-screen flex justify-center items-center bg-gray-100 relative"
+      className="z-10 font-serif min-h-screen flex justify-center items-center bg-gray-100 relative"
       style={{
         backgroundImage: `url(${home})`,
         backgroundSize: 'cover',

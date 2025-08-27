@@ -14,6 +14,7 @@ import History from './Page/Institutional/History';
 
 import FAQ from "./Page/Help/FAQ"
 import Contact from "./Page/Help/Contact"
+import Returns from "./Page/Help/Returns"
 
 import Produto from "./components/molecules/Compra/Tela"
 import ComponentsFooter from "./components/organism/footer/footer";
@@ -49,11 +50,13 @@ function AppContent() {
       {/* Navbar sempre visível */}
       <Navbar />
 
-      {/* Ajusta o padding top para não ficar atrás da navbar */}
+  
       <div className={!isHomePage ? 'pt-[60px]' : ''}>
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/artists" element={<Artist />} />
+          <Route path="/trocas" element={<Returns/>} />
           <Route path="/synaWorld" element={<SynaWorld />} />
           <Route path="/products" element={<Products />} />
           <Route path="/about" element={<About />} />
