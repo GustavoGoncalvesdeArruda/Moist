@@ -6,7 +6,7 @@ import Section from "../../components/molecules/produtos/Section"
 import UK from '../../image/UK.jpg';
 import Trapstar from '../../image/Trapstar.jpg';
 import Corteiz from '../../image/Corteiz.png';
-import Syna from '../../image/CC.png'
+import Syna from '../../image/CC2.jpg'
 import of from '../../image/1of1.png'
 
 const Ukdrip = () => {
@@ -19,7 +19,7 @@ const Ukdrip = () => {
 
   return (
     <div className="font-sans bg-white min-h-screen">
-      <div className="flex-1 space-y-16 py-10">
+      <div className="flex-1 space-y-16">
 
 
         <div>

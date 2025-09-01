@@ -95,7 +95,6 @@ const Produto = ({ produto }: ProdutoProps) => {
     };
 
     adicionarProduto(produtoParaCarrinho);
-    alert("Produto adicionado ao carrinho!");
   };
 
   return (

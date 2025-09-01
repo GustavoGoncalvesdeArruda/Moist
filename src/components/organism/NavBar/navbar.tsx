@@ -195,7 +195,10 @@ const Navbar = () => {
           <Link to="/products" className="mb-4 text-xm text-3xl md:text-base  ">
             Produtos
           </Link>
-        </div>
+          <Link to="/login" className="mb-4 text-xm text-3xl md:text-base">
+            Login
+          </Link>
+        </div> 
       )}
 
       {carrinhoAberto && (

@@ -1,4 +1,7 @@
 import { useState } from "react";
+import sportlife from '../../image/sportlife5.png'
+import sportlife2 from '../../image/sportlife3.png'
+
 
 const politicas = [
   {
@@ -52,12 +55,12 @@ const Returns = () => {
         {/* Imagens à esquerda (em telas maiores) ou no topo (em telas menores) */}
         <div className="flex flex-col items-center justify-center w-full md:w-1/2 space-y-6">
           <img
-            src={''} // Certifique-se de que o caminho da imagem está correto
+            src={sportlife} // Certifique-se de que o caminho da imagem está correto
             alt="Processo de Troca e Devolução"
             className="rounded-lg shadow-lg max-w-full h-auto"
           />
           <img
-            src={''} // Certifique-se de que o caminho da imagem está correto
+            src={sportlife2} // Certifique-se de que o caminho da imagem está correto
             alt="Política de Devolução"
             className="rounded-lg shadow-lg max-w-full h-auto"
           />

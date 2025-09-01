@@ -25,7 +25,6 @@ const TelaDeContato: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setFormStatus('Enviando...');
 
     setTimeout(() => {
       setIsSubmitting(false);

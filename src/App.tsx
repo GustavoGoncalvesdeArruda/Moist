@@ -5,6 +5,9 @@ import { useParams } from 'react-router-dom';
 import { produtos } from "./components/molecules/produtos/produtos"
 import { CartProvider } from './components/molecules/cartprovinder/cartcontext';
 
+import Login from "./components/molecules/Login/login"
+
+import Register from "./components/molecules/Login/register"
 
 import Home from "./Page/Home/Home"
 import HomePage from './Page/Home/HomePage';
@@ -55,6 +58,8 @@ function AppContent() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />}/>
+          <Route path="/login" element={<Login />} />
           <Route path="/artists" element={<Artist />} />
           <Route path="/trocas" element={<Returns/>} />
           <Route path="/synaWorld" element={<SynaWorld />} />

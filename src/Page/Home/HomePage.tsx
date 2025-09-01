@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import ComponentsCardColecao from "../../components/props/CardFullImg/Cardimgfull";
 import ComponentsImagemCard from "../../components/props/CardImg/CardImagem";
 import Section from "../../components/molecules/produtos/Section";
-import Drill from '../../image/Ukdrill.jpg';
+import Drill from '../../image/Corteiz3.jpg';
 import kidwild from '../../image/Kidwild.jpg';
 import Ice from '../../image/Ice.webp'
 import Touca from '../../image/Touca.webp';
