@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Syna from '../../image/SynaW.png'
+import Syna from '../../image/Posters/SynaW.png'
 
 const SynaWorld = () => {
   useEffect(() => {

@@ -1,6 +1,6 @@
 import { useState , useEffect } from "react";
 import { useNavigate , Link } from "react-router-dom";
-import { FaSearch , FaShoppingCart} from "react-icons/fa";
+import { FaSearch , FaShoppingCart, FaUserAlt} from "react-icons/fa";
 import { produtos } from "../../molecules/produtos/produtos";
 import logo from '../../../image/logoB.png'
 import Carrinho from "../../molecules/carrinho/carrinho"
@@ -157,6 +157,13 @@ const Navbar = () => {
             <FaShoppingCart />
           </button>
 
+          {/*Botão do Login*/   }
+          <button>
+            <Link to="/login" className="text-white hover:text-gray-300 transition-colors duration-300">
+              <FaUserAlt/> 
+            </Link>
+          </button>
+
           {/*Botão do Menu*/}
           <button
             onClick={toggleMenu}
@@ -165,6 +172,7 @@ const Navbar = () => {
           >
             ☰
           </button>
+
         </div>
       </nav>
 
@@ -194,9 +202,6 @@ const Navbar = () => {
           </Link>
           <Link to="/products" className="mb-4 text-xm text-3xl md:text-base  ">
             Produtos
-          </Link>
-          <Link to="/login" className="mb-4 text-xm text-3xl md:text-base">
-            Login
           </Link>
         </div> 
       )}

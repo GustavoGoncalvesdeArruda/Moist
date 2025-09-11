@@ -79,7 +79,7 @@ export const produtos: Produto[] = [
     imagemdesc: 'https://www.picclickimg.com/YAMAAOSw0T1m0Nvd/corteiz-trucker-hat.webp',
     desc: 'O boné Corteiz 4-Star Trucker é um acessório indispensável para quem quer estilo e praticidade. Com ajuste snapback na parte traseira, oferece encaixe perfeito para diversos tamanhos. Seu design moderno e a qualidade do material garantem resistência e conforto durante o uso. Ideal para complementar looks urbanos ou esportivos, protege contra o sol com muito charme. Um toque final que faz toda a diferença no visual.',
     categoria: 'Acessórios',
-    tamanhos: ['Branco', 'Preto'],
+    tamanhos: ['Único'],
     marca: 'Corteiz',
   },
   {
@@ -401,7 +401,7 @@ export const produtos: Produto[] = [
     imagemdesc: 'https://imgnike-a.akamaihd.net/768x768/07961015A2.jpg',
     desc: 'Meias para atividades intensas.',
     categoria: 'Tênis',
-    tamanhos: ['Único'],
+    tamanhos: ['36','37','38','39','40','41','42','43'],
     marca: 'Nike',
 },
   {
@@ -423,7 +423,7 @@ export const produtos: Produto[] = [
     imagemdesc: '',
     desc: 'Camiseta oversized confortável.',
     categoria: 'Tênis',
-    tamanhos: ['P', 'M', 'G', 'GG'],
+    tamanhos: ['36','37','38','39','40','41','42','43'],
     marca: 'Nike',
   },
   {
@@ -456,7 +456,7 @@ export const produtos: Produto[] = [
     imagemdesc: 'https://cdn-images.farfetch-contents.com/20/49/51/10/20495110_50410039_1000.jpg',
     desc: 'Boné estilo trucker Corteiz.',
     categoria: 'Tênis',
-    tamanhos: ['Único'],
+    tamanhos: ['36','37','38','39','40','41','42','43'],
     marca: 'Nike',
   },
   {

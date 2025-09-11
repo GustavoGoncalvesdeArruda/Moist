@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Sportlife from "../../image/sportlife2.png"
-import Sportlife2 from "../../image/sportlife5.png"
+import Sportlife from "../../image/Posters/sportlife2.png"
+import Sportlife2 from "../../image/Posters/sportlife5.png"
 
 const perguntas = [
   {

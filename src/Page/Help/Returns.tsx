@@ -1,6 +1,6 @@
 import { useState } from "react";
-import sportlife from '../../image/sportlife5.png'
-import sportlife2 from '../../image/sportlife3.png'
+import sportlife from '../../image/Posters/sportlife3.png'
+import sportlife2 from '../../image/Posters/sportlife2.png'
 
 
 const politicas = [

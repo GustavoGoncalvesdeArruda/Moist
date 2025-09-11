@@ -3,10 +3,10 @@ import { useEffect } from "react";
 import ComponentsCardColecao from "../../components/props/CardFullImg/Cardimgfull";
 import Section from "../../components/molecules/produtos/Section"
 
-import UK from '../../image/UK.jpg';
+import UK from '../../image/Posters/UK.jpg';
 import Trapstar from '../../image/Trapstar.jpg';
 import Corteiz from '../../image/Corteiz.png';
-import Syna from '../../image/CC2.jpg'
+import Syna from '../../image/Posters/CC2.jpg'
 import of from '../../image/1of1.png'
 
 const Ukdrip = () => {

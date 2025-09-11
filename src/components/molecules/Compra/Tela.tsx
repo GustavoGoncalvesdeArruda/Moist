@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate , useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useCart } from "../cartprovinder/cartcontext";
 import Qualidade from "../../../image/Qualidade.png";
 import Qualidade2 from "../../../image/Qualidade2.png";
-import Section from "../produtos/Section"
+import Section from "../produtos/Section";
 
 interface ProdutoType {
   id: string;
@@ -14,7 +14,7 @@ interface ProdutoType {
   desc: string;
   tamanhos: string[];
   categoria: string;
-  marca:string;
+  marca: string;
 }
 
 interface ProdutoProps {
@@ -43,12 +43,12 @@ const SizeButton = ({
   <button
     onClick={onClick}
     className={`
-      w-14 h-14 flex items-center justify-center border-2
+      w-10 h-10 flex items-center justify-center border-1
       text-lg transition
       ${
         isSelected
-          ? "bg-black text-white border-black scale-105 shadow-lg"
-          : "bg-white text-neutral-900 border-neutral-300 hover:bg-neutral-200"
+          ? "bg-white text-black border-white scale-105 shadow-lg"
+          : "bg-black text-white border-black hover:bg-black"
       }
     `}
   >
@@ -59,23 +59,23 @@ const SizeButton = ({
 const Produto = ({ produto }: ProdutoProps) => {
   const { adicionarProduto } = useCart();
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [quantidade, setQuantidade] = useState<number>(1);
   const navigate = useNavigate();
-  const { idProduto } = useParams(); 
+  const { idProduto } = useParams();
 
   useEffect(() => {
-    // OU quando o `idProduto` (da URL) mudar, o que acontece quando você navega para um novo produto.
     window.scrollTo(0, 0);
-    setSelectedSize(null); // Opcional: Limpar o tamanho selecionado ao navegar para um novo produto
-  }, [idProduto]); // Adicione idProduto como dependência para que o efeito seja re-executado quando a URL mudar.
+    setSelectedSize(null);
+    setQuantidade(1);
+  }, [idProduto]);
 
-  //Alerta de Tamanho
   const handleAddToCart = () => {
     if (!selectedSize) {
       alert("Por favor, selecione um tamanho.");
       return;
     }
 
-  //Preço
+    //////////// Converter preço para número//////////////////
     const precoNumerico = parseFloat(
       produto.preco.replace("R$", "").replace(".", "").replace(",", ".")
     );
@@ -85,12 +85,11 @@ const Produto = ({ produto }: ProdutoProps) => {
       return;
     }
 
-    //Campo de envio para carrinho
     const produtoParaCarrinho = {
       id: parseInt(produto.id, 10),
       nome: produto.titulo,
       preco: precoNumerico,
-      quantidade: 1,
+      quantidade,
       tamanhoSelecionado: selectedSize,
     };
 
@@ -102,7 +101,10 @@ const Produto = ({ produto }: ProdutoProps) => {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 py-12 px-4 md:px-8">
         <div className="flex flex-col gap-6 w-full md:w-1/2 items-center md:items-start">
           <ProductImage src={produto.imagem} alt={produto.titulo} />
-          <ProductImage src={produto.imagemdesc} alt={`${produto.titulo} detalhe`} />
+          <ProductImage
+            src={produto.imagemdesc}
+            alt={`${produto.titulo} detalhe`}
+          />
         </div>
 
         <div className="flex-1 flex flex-col justify-between">
@@ -113,8 +115,7 @@ const Produto = ({ produto }: ProdutoProps) => {
             <p className="text-lg text-neutral-700 mb-6 max-w-xl">{produto.desc}</p>
             <p className="text-2xl font-bold text-neutral-900 mb-8">{produto.preco}</p>
 
-
-            {/*Seleção de Tamanho*/}
+            {/* Seleção de Tamanho */}
             <div>
               <label className="block mb-2 font-semibold text-neutral-800 text-lg">
                 Selecione o tamanho
@@ -130,11 +131,31 @@ const Produto = ({ produto }: ProdutoProps) => {
                 ))}
               </div>
               {!selectedSize && (
-                <div className="text-xs text-red-500 mt-2">Selecione um tamanho</div>
+                <div className="text-xs text-red-500 mt-2">
+                  Selecione um tamanho
+                </div>
               )}
             </div>
 
-            {/*Botões*/}
+            {/* Seleção de Quantidade */}
+            <div className="mt-4">
+              <label className="block mb-2 font-semibold text-neutral-800 text-lg">
+                Quantidade
+              </label>
+              <select
+                className="border border-gray-300 rounded px-3 py-2"
+                value={quantidade}
+                onChange={(e) => setQuantidade(parseInt(e.target.value))}
+              >
+                {[...Array(10)].map((_, i) => (
+                  <option key={i + 1} value={i + 1}>
+                    {i + 1}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Botões */}
             <div className="flex flex-col md:flex-row gap-4 mt-8">
               <button
                 onClick={handleAddToCart}
@@ -150,7 +171,7 @@ const Produto = ({ produto }: ProdutoProps) => {
               </button>
             </div>
 
-            {/*Qualidade*/}
+            {/* Qualidade */}
             <div>
               <h1 className="text-2xl font-serif font-semibold text-center my-8 text-black">
                 Qualidade Garantida
@@ -161,31 +182,37 @@ const Produto = ({ produto }: ProdutoProps) => {
                 <img src={Qualidade2} alt="" className="w-20" />
               </div>
 
-              {/*Descrição*/}
-              <p className="text-clip font-serif text-xm  text-neutral-600 mt-2 justify-center">
-                Nossos produtos são desenvolvidos com atenção a cada detalhe, unindo estilo, conforto e durabilidade. Utilizamos materiais de alta qualidade e processos de fabricação responsáveis, garantindo peças que resistem ao tempo e ao uso diário.<br/>
-                ✅ Acabamento Premium: Costuras reforçadas e cortes precisos.<br/>
-                ✅ Materiais Selecionados: Tecidos, couros e sintéticos escolhidos por sua resistência e toque agradável.<br/>
-                ✅ Conforto que você sente: Modelagens pensadas para o seu dia a dia.<br/>
-                ✅ Durabilidade Comprovada: Produtos feitos para acompanhar seu ritmo por muito mais tempo.<br/>
-                Invista em produtos que entregam mais do que aparência — entregam confiança.
-              </p>
+              {/* Descrição */}
+              <div className="font-serif text-sm text-neutral-600 mt-2">
+                <p className="mb-4 text-justify">
+                  Nossos produtos são desenvolvidos com atenção a cada detalhe, unindo estilo, conforto e durabilidade. Utilizamos materiais de alta qualidade e processos de fabricação responsáveis, garantindo peças que resistem ao tempo e ao uso diário.
+                </p>
 
+                <ul className="list-disc list-inside space-y-2">
+                  <li>Acabamento Premium: Costuras reforçadas e cortes precisos.</li>
+                  <li>Materiais Selecionados: Tecidos, couros e sintéticos escolhidos por sua resistência e toque agradável.</li>
+                  <li>Conforto que você sente: Modelagens pensadas para o seu dia a dia.</li>
+                  <li>Durabilidade Comprovada: Produtos feitos para acompanhar seu ritmo por muito mais tempo.</li>
+                  <li>Invista em produtos que entregam mais do que aparência — entregam confiança.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Recomendados*/}
-  
-        <h1 className="font-serif text-2xl font-bold text-center my-8 text-black">Talvez você goste</h1>
+      {/* Recomendados */}
+      <h1 className="font-serif text-2xl font-bold text-center my-8 text-black">
+        Talvez você goste
+      </h1>
 
-          <Section
-            handleProductClick={(idProduto: string) => navigate(`/produto/${idProduto}`)}
-            filtroCategoria={produto.categoria}
-            filtroMarca={produto.marca}
-          />
-    
+      <Section
+        handleProductClick={(idProduto: string) =>
+          navigate(`/produto/${idProduto}`)
+        }
+        filtroCategoria={produto.categoria}
+        filtroMarca={produto.marca}
+      />
     </div>
   );
 };

@@ -7,7 +7,7 @@ const Login = () => {
   const [usuarioLogado, setUsuarioLogado] = useState<string | null>(null);
 
   const navigate = useNavigate();
-
+  window.scrollTo(0, 0);
   // Ao carregar, verifica se o usuário já está logado
   useEffect(() => {
     const usuario = localStorage.getItem("usuario");

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import BotaoPersonalizado from "../../components/props/Button/button";
 import logo from '../../image/logo.png';
-import home from '../../image/sportlife5.png'
+import home from '../../image/Posters/sportlife5.png'
 
 interface HomeProps {
   className?: string;

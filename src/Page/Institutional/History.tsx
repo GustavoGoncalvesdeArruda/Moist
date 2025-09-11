@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Sportlife from "../../image/sportlife5.png"
+import Sportlife from "../../image/Posters/sportlife5.png"
 
 const History = () => {
 
