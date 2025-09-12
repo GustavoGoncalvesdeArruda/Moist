@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Sportlife from "../../image/Posters/sportlife2.png"
-import Sportlife2 from "../../image/Posters/sportlife5.png"
+import Sportlife from "../../image/Posters/sportlife2.png";
+import Sportlife2 from "../../image/Posters/sportlife5.png";
 
 const perguntas = [
   {
@@ -43,35 +43,29 @@ const FAQ = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br">
-      <div className="flex flex-row w-full max-w">
-   
+    <div className="flex justify-center items-center min-h-screen bg-neutral-900 font-sans text-neutral-200">
+      <div className="flex flex-col md:flex-row w-full max-w-7xl mx-auto py-12 px-6 md:px-12 gap-10">
+
         {/* Imagens à esquerda */}
-        <div className="flex-col items-center justify-center w-1/2">
-          <img
-            src={Sportlife2}
-            alt=""
-          />
-          <img
-            src={Sportlife}
-            alt=""
-          />
+        <div className="flex flex-col items-center justify-center w-full md:w-1/2 space-y-6">
+          <img src={Sportlife2} alt="Imagem ilustrativa 1" className="rounded-lg shadow-lg max-w-full h-auto" />
+          <img src={Sportlife} alt="Imagem ilustrativa 2" className="rounded-lg shadow-lg max-w-full h-auto" />
         </div>
 
         {/* Cards à direita */}
-        <div className="w-1/2 pl-8 flex flex-col justify-center">
-          <h1 className="text-3xl font-bold text-black text-center mb-8">
+        <div className="w-full md:w-1/2 flex flex-col justify-center">
+          <h1 className="text-4xl font-extrabold text-red-500 text-center md:text-left mb-8 tracking-tight">
             Perguntas Frequentes
           </h1>
           <div className="space-y-4">
             {perguntas.map((item, idx) => (
-              <div key={idx} className="border-b border-gray-200 pb-2">
+              <div key={idx} className="border-b border-neutral-700 pb-2">
                 <button
-                  className={`w-full flex justify-between items-center text-lg font-semibold py-3 px-2 rounded transition-colors
+                  className={`w-full flex justify-between items-center text-lg font-semibold py-3 px-4 rounded-lg transition-colors duration-300
                     ${
                       aberta === idx
-                        ? "bg-black text-white"
-                        : "bg-gray-100 text-black hover:bg-gray-200"
+                        ? "bg-red-700 text-white shadow-md"
+                        : "bg-neutral-800 text-neutral-200 hover:bg-neutral-700"
                     }
                   `}
                   onClick={() => handleToggle(idx)}
@@ -80,7 +74,7 @@ const FAQ = () => {
                 >
                   <span>{item.titulo}</span>
                   <span
-                    className={`ml-2 transition-transform ${
+                    className={`ml-2 text-xl transform transition-transform duration-300 ${
                       aberta === idx ? "rotate-90" : ""
                     }`}
                   >
@@ -90,7 +84,7 @@ const FAQ = () => {
                 {aberta === idx && (
                   <div
                     id={`faq-desc-${idx}`}
-                    className="text-base text-gray-700 mt-2 px-2 animate-fade-in"
+                    className="text-base text-neutral-400 mt-2 px-4 py-2 bg-neutral-800 rounded-b-lg animate-fade-in"
                   >
                     {item.descricao}
                   </div>
@@ -101,14 +95,14 @@ const FAQ = () => {
         </div>
       </div>
 
-      {/* Pequena animação para fade-in */}
+      {/* Animação fade-in */}
       <style>
         {`
           .animate-fade-in {
-            animation: fadeIn 0.3s;
+            animation: fadeIn 0.3s ease-out;
           }
           @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-8px);}
+            from { opacity: 0; transform: translateY(-10px);}
             to { opacity: 1; transform: translateY(0);}
           }
         `}

@@ -2,7 +2,6 @@ import { useState } from "react";
 import sportlife from '../../image/Posters/sportlife3.png'
 import sportlife2 from '../../image/Posters/sportlife2.png'
 
-
 const politicas = [
   {
     titulo: "Qual o prazo para solicitar uma troca ou devolução?",
@@ -49,40 +48,40 @@ const Returns = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-neutral-50 font-sans">
+    <div className="flex justify-center items-center min-h-screen bg-neutral-900 font-sans text-neutral-200">
       <div className="flex flex-col md:flex-row w-full max-w-7xl mx-auto py-12 px-4 md:px-8 gap-8">
 
-        {/* Imagens à esquerda (em telas maiores) ou no topo (em telas menores) */}
+        {/* Imagens */}
         <div className="flex flex-col items-center justify-center w-full md:w-1/2 space-y-6">
           <img
-            src={sportlife} // Certifique-se de que o caminho da imagem está correto
+            src={sportlife}
             alt="Processo de Troca e Devolução"
             className="rounded-lg shadow-lg max-w-full h-auto"
           />
           <img
-            src={sportlife2} // Certifique-se de que o caminho da imagem está correto
+            src={sportlife2}
             alt="Política de Devolução"
             className="rounded-lg shadow-lg max-w-full h-auto"
           />
         </div>
 
-        {/* Cards de perguntas e respostas à direita (em telas maiores) ou abaixo (em telas menores) */}
+        {/* Perguntas e respostas */}
         <div className="w-full md:w-1/2 md:pl-8 flex flex-col justify-center">
-          <h1 className="text-4xl font-extrabold text-neutral-900 text-center mb-8 tracking-tight">
+          <h1 className="text-4xl font-extrabold text-red-500 text-center mb-8 tracking-tight">
             Política de Trocas e Devoluções
           </h1>
-          <p className="text-lg text-neutral-700 text-center md:text-left mb-8 max-w-xl mx-auto md:mx-0">
+          <p className="text-lg text-neutral-400 text-center md:text-left mb-8 max-w-xl mx-auto md:mx-0">
             Na nossa loja, sua satisfação é prioridade! Entenda como funcionam nossas políticas para troca e devolução de produtos.
           </p>
           <div className="space-y-4">
             {politicas.map((item, idx) => (
-              <div key={idx} className="border-b border-neutral-200 pb-2">
+              <div key={idx} className="border-b border-neutral-700 pb-2">
                 <button
                   className={`w-full flex justify-between items-center text-lg font-semibold py-3 px-4 rounded-lg transition-colors duration-300 ease-in-out
                     ${
                       aberta === idx
-                        ? "bg-black text-white shadow-md"
-                        : "bg-white text-neutral-800 hover:bg-neutral-100 shadow-sm"
+                        ? "bg-red-700 text-white shadow-md"
+                        : "bg-neutral-800 text-neutral-200 hover:bg-neutral-700 shadow-sm"
                     }
                   `}
                   onClick={() => handleToggle(idx)}
@@ -101,7 +100,7 @@ const Returns = () => {
                 {aberta === idx && (
                   <div
                     id={`politica-desc-${idx}`}
-                    className="text-base text-neutral-600 mt-2 px-4 py-2 bg-neutral-50 rounded-b-lg animate-fade-in"
+                    className="text-base text-neutral-400 mt-2 px-4 py-2 bg-neutral-800 rounded-b-lg animate-fade-in"
                   >
                     {item.descricao}
                   </div>
@@ -112,7 +111,7 @@ const Returns = () => {
         </div>
       </div>
 
-      {/* Pequena animação para fade-in */}
+      {/* Animação fade-in */}
       <style>
         {`
           .animate-fade-in {

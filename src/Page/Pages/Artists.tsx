@@ -1,17 +1,16 @@
 import { useEffect } from "react";
-import Zlatan from '../../image/Artists/Zlatan.png'
-import Nemzz from '../../image/Artists/Nemzzz.jpg'
-import Kidwild from '../../image/Artists/Kidwild2.jpg'
-import Bradockdan from '../../image/Artists/Bradockdan.png'
-import Central from '../../image/Artists/Central-cee3.png'
-
+import Zlatan from '../../image/Artists/Zlatan.png';
+import Nemzz from '../../image/Artists/Nemzzz.jpg';
+import Kidwild from '../../image/Artists/Kidwild2.jpg';
+import Bradockdan from '../../image/Artists/Bradockdan.png';
+import Central from '../../image/Artists/Central-cee3.png';
 
 const Artist = () => {
   useEffect(() => {
     window.scrollTo(0, 0);  
   }, []);
 
-  //Conteúdo
+  // Conteúdo
   const items = [
     {
       titulo: 'Nemzz',
@@ -28,12 +27,12 @@ const Artist = () => {
       descricao: "Oakley Neil H. T. Caesar-Su, conhecido profissionalmente como Central Cee, é um rapper e compositor britânico de Shepherd's Bush, Londres. Ele ganhou destaque em 2020 com o lançamento dos singles Day in the Life e Loading. A sua primeira mixtape, Wild West, foi lançada a 12 de março de 2021, estreando-se em segundo lugar na tabela de álbuns do Reino Unido. A sua segunda mixtape, 23, foi lançada a 25 de fevereiro de 2022 e estreou-se no topo da tabela de álbuns do Reino Unido.", 
       image: Central,
     },
-     { 
+    { 
       titulo: "LPT Zlatan", 
       descricao: "LPT Zlatan é um cantor, compositor e artista brasileiro que tem se destacado na cena musical com seu estilo único, mesclando elementos de rap, trap e música urbana contemporânea. Conhecido pela sua versatilidade e letras que refletem experiências pessoais e críticas sociais, LPT Zlatan conquistou uma base fiel de fãs desde o início da sua carreira. Sua trajetória começou de forma independente, lançando músicas nas plataformas digitais e ganhando reconhecimento com faixas que rapidamente viralizaram. Com uma presença marcante nas redes sociais e uma energia contagiante nos palcos, LPT Zlatan tem sido apontado como uma das promessas da nova geração do hip-hop brasileiro." ,
       image: Zlatan,
     },
-     { 
+    { 
       titulo: "Bradockdan", 
       descricao: "Bradockdan é um rapper, cantor e compositor brasileiro que tem ganhado destaque na cena do hip-hop nacional por seu estilo autêntico e letras impactantes. Originário de um ambiente urbano, ele traz para suas músicas narrativas que refletem a realidade das periferias brasileiras, combinando ritmo, poesia e crítica social. Com uma carreira construída principalmente na internet e nas redes sociais, Bradockdan conseguiu criar uma base sólida de fãs que se identificam com sua mensagem e sua energia nas performances ao vivo. Seu som mistura influências do rap tradicional com elementos contemporâneos do trap e do rap nacional, criando uma sonoridade única e envolvente." ,
       image: Bradockdan,
@@ -41,42 +40,42 @@ const Artist = () => {
   ];
 
   return (
-    <div className="font-serif flex justify-center bg-neutral-100 min-h-screen py-10">
-      <div className="w-full max-w-3xl bg-white shadow-lg border border-gray-200 rounded-md">
+    <div className="font-serif flex justify-center bg-neutral-900 min-h-screen py-10 text-neutral-200">
+      <div className="w-full max-w-3xl bg-neutral-800 shadow-lg border border-neutral-700 rounded-md">
        
-
-        {/*Cabeçalho*/}
-        <header className="flex flex-col items-center px-6 pt-8 pb-4 border-b border-black">
+        {/* Cabeçalho */}
+        <header className="flex flex-col items-center px-6 pt-8 pb-4 border-b border-neutral-600">
     
-          {/*Título*/}
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 leading-tight text-center" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
-           Artista que inspiraram a criação de nosso site!
+          {/* Título */}
+          <h1
+            className="text-3xl md:text-4xl font-bold mb-2 leading-tight text-center text-neutral-100"
+            style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}
+          >
+            Artistas que inspiraram a criação de nosso site!
           </h1>
 
-          <p className="text-gray-500 text-sm mb-2 text-center">
+          <p className="text-neutral-400 text-sm mb-2 text-center">
             Por Redação Moist News &bull; {new Date().toLocaleDateString()}
           </p>
-
         </header>
 
-        {/*Imagem*/}
-        <div className="w-full flex justify-center bg-neutral-50 border-b border-gray-200 py-6">
-          <img 
-            src={''}
-            alt="Imagem de capa"  
-            className="w-full max-w-full h-full object-cover rounded"
-          />
+        {/* Imagem de capa (se quiser usar uma imagem, coloque aqui) */}
+        <div className="w-full flex justify-center bg-neutral-800 border-b border-neutral-700 py-6 rounded-t-md">
+          {/* Imagem de capa vazia, pode adicionar algo se quiser */}
         </div>
     
-        {/*Estrutura do Artigo*/}
+        {/* Estrutura do artigo */}
         <div className="p-6 flex flex-col items-center">
           {items.map((item, index) => (
             <div key={index} className="mb-8 max-w-2xl w-full">
-              <img src={item.image} alt="imagem" />
-              <h2 className="text-center text-2xl font-semibold text-gray-800 mb-4" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
+              <img src={item.image} alt={`Imagem de ${item.titulo}`} className="mx-auto rounded-md mb-4" />
+              <h2
+                className="text-center text-2xl font-semibold mb-4 text-neutral-100"
+                style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}
+              >
                 {item.titulo}
               </h2>
-              <p className="text-center text-gray-700 leading-relaxed mb-4">
+              <p className="text-center text-neutral-300 leading-relaxed mb-4">
                 {item.descricao}
               </p>
             </div>

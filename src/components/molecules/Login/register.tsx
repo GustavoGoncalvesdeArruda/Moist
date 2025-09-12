@@ -11,7 +11,9 @@ const Register = () => {
 
   const [usuarioLogado, setUsuarioLogado] = useState<string | null>(null);
 
-  window.scrollTo(0, 0);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const usuario = localStorage.getItem("usuario");
@@ -39,7 +41,7 @@ const Register = () => {
           endereco,
           telefone,
           cep,
-        })
+        }),
       });
 
       if (response.ok) {
@@ -63,94 +65,109 @@ const Register = () => {
 
   if (usuarioLogado) {
     return (
-      <div>
-        <h2>Bem-vindo, {usuarioLogado}!</h2>
-        <button onClick={handleLogout}>Sair</button>
+      <div className="max-w-sm mx-auto p-4 text-center">
+        <h2 className="text-2xl font-semibold mb-6">Bem-vindo, {usuarioLogado}!</h2>
+        <button
+          onClick={handleLogout}
+          className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition"
+        >
+          Sair
+        </button>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleRegister} className="max-w-sm mx-auto p-4">
-      <h2 className="text-xl font-bold mb-4">Crie sua conta</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">Crie sua conta</h2>
 
-      <label className="block mb-2">
+      <label htmlFor="nome" className="block mb-4 font-medium text-gray-700">
         Nome:
         <input
+          id="nome"
           type="text"
           value={nome}
           onChange={(e) => setNome(e.target.value)}
           required
-          className="w-full p-2 border rounded mt-1"
+          className="w-full p-2 border rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </label>
 
-      <label className="block mb-2">
+      <label htmlFor="email" className="block mb-4 font-medium text-gray-700">
         Email:
         <input
+          id="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full p-2 border rounded mt-1"
           placeholder="example@gmail.com"
+          autoComplete="email"
+          className="w-full p-2 border rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </label>
 
-      <label className="block mb-4">
+      <label htmlFor="senha" className="block mb-4 font-medium text-gray-700">
         Senha:
         <input
+          id="senha"
           type="password"
           value={senha}
           onChange={(e) => setSenha(e.target.value)}
           required
-          className="w-full p-2 border rounded mt-1"
+          autoComplete="new-password"
+          className="w-full p-2 border rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </label>
 
-      <label className="block mb-4">
+      <label htmlFor="confirmesenha" className="block mb-4 font-medium text-gray-700">
         Confirme sua Senha:
         <input
+          id="confirmesenha"
           type="password"
           value={confirmesenha}
           onChange={(e) => setConfirmeSenha(e.target.value)}
           required
-          className="w-full p-2 border rounded mt-1"
+          autoComplete="new-password"
+          className="w-full p-2 border rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </label>
 
-      <label className="block mb-4">
+      <label htmlFor="endereco" className="block mb-4 font-medium text-gray-700">
         Endereço:
         <input
+          id="endereco"
           type="text"
           value={endereco}
           onChange={(e) => setEndereco(e.target.value)}
           required
-          className="w-full p-2 border rounded mt-1"
+          className="w-full p-2 border rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </label>
 
-      <label className="block mb-4">
+      <label htmlFor="telefone" className="block mb-4 font-medium text-gray-700">
         Telefone:
         <input
-          type="text"
+          id="telefone"
+          type="tel"
           value={telefone}
           onChange={(e) => setTelefone(e.target.value)}
           required
-          className="w-full p-2 border rounded mt-1"
           placeholder="(99) 99999-9999"
+          className="w-full p-2 border rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </label>
 
-      <label className="block mb-4">
+      <label htmlFor="cep" className="block mb-6 font-medium text-gray-700">
         CEP:
         <input
+          id="cep"
           type="text"
           value={cep}
           onChange={(e) => setCep(e.target.value)}
           required
-          className="w-full p-2 border rounded mt-1"
           placeholder="12345678"
+          className="w-full p-2 border rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </label>
 

@@ -1,87 +1,79 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-import Visa from '../../../image/Payments/Visa.png'
-import Mastercard from '../../../image/Payments/Mastercard.png'
-import Elo from '../../../image/Payments/Elo.png'
-import Boleto from '../../../image/Payments/Boleto.png'
-import Pix from '../../../image/Payments/Pix.png'
-import logob from  '../../../image/logoB.png'
+import Visa from '../../../image/Payments/Visa.png';
+import Mastercard from '../../../image/Payments/Mastercard.png';
+import Elo from '../../../image/Payments/Elo.png';
+import Boleto from '../../../image/Payments/Boleto.png';
+import Pix from '../../../image/Payments/Pix.png';
+import logob from  '../../../image/logoB.png';
 
 interface ComponentsFooterProps {
   descricao: string;
-  imagem: string;
 }
 
-const ComponentsFooter: React.FC<ComponentsFooterProps> = ({
-  descricao,
-}) => {
+const ComponentsFooter: React.FC<ComponentsFooterProps> = ({ descricao }) => {
   const navigate = useNavigate();
 
   return (
-    <>
-      <div className="bg-black flex flex-col items-center justify-center space-y-4 w-full pb-20">
-      
-   
-        <div onClick={() => navigate('/homepage')} className="flex items-center justify-center space-x-2">
-          <a
-            href={''}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 "
-          >
-            <img  
-              src={logob}
-              alt={descricao}
-              className="w-80 h-80 object-contain"
-            />
-            <p className="text-3xl md:text-7xl font-black text-white mb-4   tracking-tight uppercase text-center">{descricao}</p>
-          </a>
+    <footer className="bg-neutral-900 text-white py-16 px-6">
+      <div className="max-w-7xl mx-auto flex flex-col items-center space-y-10">
+        {/* Logo + título clicável */}
+        <div
+          onClick={() => navigate('/homepage')}
+          className="flex flex-col items-center cursor-pointer select-none"
+          aria-label="Voltar para a página inicial"
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') navigate('/homepage'); }}
+        >
+          <img src={logob} alt="Logo da empresa" className="w-48 h-48 object-contain mb-4" />
+          <h1 className="text-5xl font-extrabold uppercase tracking-tight text-center">{descricao}</h1>
         </div>
 
+        {/* Navegação */}
+        <nav className="w-full flex flex-wrap justify-between gap-10 max-w-6xl">
+          {/* Colunas */}
+          <section className="flex flex-col items-center min-w-[140px] space-y-2">
+            <h2 className="font-semibold text-lg mb-2">Ajuda</h2>
+            <Link to="/contact" className="text-sm hover:underline">Fale Conosco</Link>
+            <Link to="/faq" className="text-sm hover:underline">Perguntas Frequentes</Link>
+            <Link to="/trocas" className="text-sm hover:underline">Trocas e Devoluções</Link>
+          </section>
 
-        <div className="w-full flex flex-col md:flex-row items-center justify-between px-2">
-       
-
-          <div className="flex flex-col items-center">
-            <span className="font-semibold text-white mb-1">Ajuda</span>
-            <a href="/contact" className="text-sm text-white hover:underline">Fale conosco</a>
-            <a href="/faq" className="text-sm text-white hover:underline">Perguntas frequentes</a>
-            <a href="/trocas" className="text-sm text-white hover:underline">Trocas e devoluções</a>
-          </div>
-
- 
-          <div className="flex flex-col items-center">
-            <span className="font-semibold text-white mb-1">Formas de Pagamento</span>
-            <div className="flex gap-2 mt-1">
-              <img src={Visa} alt="Visa" className="w-8 h-5 object-contain" />
-              <img src={Mastercard} alt="Mastercard" className="w-8 h-5 object-contain" />
-              <img src={Elo} alt="Elo" className="w-8 h-5 object-contain" />
-              <img src={Boleto} alt="Boleto" className="w-8 h-5 object-contain" />
-              <img src={Pix} alt="Pix" className="w-8 h-5 object-contain" />
+          <section className="flex flex-col items-center min-w-[140px] space-y-2">
+            <h2 className="font-semibold text-lg mb-2">Formas de Pagamento</h2>
+            <div className="flex gap-3 mt-1">
+              {[Visa, Mastercard, Elo, Boleto, Pix].map((img, i) => (
+                <img key={i} src={img} alt={`Logo ${['Visa','Mastercard','Elo','Boleto','Pix'][i]}`} className="w-10 h-6 object-contain" />
+              ))}
             </div>
-          </div>
+          </section>
 
-         
-          <div>
-            <span className="font-semibold text-white mb-1">Páginas</span>
-                <div className="flex flex-col items-center">
-              <a href="/homepage" className="text-sm text-white hover:underline">Página inicial</a>
-              <a href="/products" className="text-sm text-white hover:underline">Todos os produtos</a>
-              <a href="/ukdrip" className="text-sm text-white hover:underline">Estilo Londrino</a>
-            </div>
-          </div>
+          <section className="flex flex-col items-center min-w-[140px] space-y-2">
+            <h2 className="font-semibold text-lg mb-2">Páginas</h2>
+            <Link to="/homepage" className="text-sm hover:underline">Início</Link>
+            <Link to="/products" className="text-sm hover:underline">Produtos</Link>
+            <Link to="/ukdrip" className="text-sm hover:underline">Londres</Link>
+          </section>
 
-       
-          <div className="flex flex-col items-center">
-            <span className="font-semibold text-white mb-1">Institucional</span>
-            <a href="/about" className="text-sm text-white hover:underline">Sobre nós</a>
-            <a href="/politics" className="text-sm text-white hover:underline">Política de privacidade</a>
-            <a href="/history" className="text-sm text-white hover:underline">Nossa história</a> 
-            <a href='/synaworld' className="text-sm text-white hover:underline">Parceria com a Syna World</a>
-          </div>
-        </div>
+          <section className="flex flex-col items-center min-w-[140px] space-y-2">
+            <h2 className="font-semibold text-lg mb-2">Institucional</h2>
+            <Link to="/about" className="text-sm hover:underline">Sobre</Link>
+            <Link to="/politics" className="text-sm hover:underline">Política de Privacidade</Link>
+            <Link to="/history" className="text-sm hover:underline">História</Link>
+            <Link to="/synaworld" className="text-sm hover:underline">Syna World</Link>
+          </section>
+
+          <section className="flex flex-col items-center min-w-[140px] space-y-2 font-bold">
+            <h2 className="sr-only">Categorias de Produtos</h2>
+            <Link to="/products?categoria=Jóias" className="text-sm hover:underline">Jóias</Link>
+            <Link to="/products?categoria=Tênis" className="text-sm hover:underline">Tênis</Link>
+            <Link to="/products?categoria=Roupa" className="text-sm hover:underline">Roupas</Link>
+            <Link to="/products?categoria=Acessórios" className="text-sm hover:underline">Acessórios</Link>
+          </section>
+        </nav>
       </div>
-    </>
+    </footer>
   );
 };
 

@@ -7,8 +7,13 @@ const Login = () => {
   const [usuarioLogado, setUsuarioLogado] = useState<string | null>(null);
 
   const navigate = useNavigate();
-  window.scrollTo(0, 0);
-  // Ao carregar, verifica se o usuário já está logado
+
+  // Scroll to top once on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // Verifica se usuário já está logado no localStorage
   useEffect(() => {
     const usuario = localStorage.getItem("usuario");
     if (usuario) {
@@ -19,14 +24,12 @@ const Login = () => {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Salvar no localStorage (simples, para demonstração)
+    // Aqui você poderia validar o login real, por enquanto só salva no localStorage
     localStorage.setItem("usuario", email);
     setUsuarioLogado(email);
 
     alert(`Bem vindo, ${email}!`);
-
-    // Navegar para página protegida após login
-    navigate("/dashboard");  // ajuste a rota para onde quer levar o usuário
+    navigate("/dashboard"); // Ajuste a rota conforme seu app
   };
 
   const handleLogout = () => {
@@ -36,36 +39,45 @@ const Login = () => {
 
   if (usuarioLogado) {
     return (
-      <div>
-        <h2>Bem-vindo, {usuarioLogado}!</h2>
-        <button onClick={handleLogout}>Sair</button>
+      <div className="max-w-sm mx-auto p-4 text-center">
+        <h2 className="text-2xl font-semibold mb-6">Bem-vindo, {usuarioLogado}!</h2>
+        <button
+          onClick={handleLogout}
+          className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition"
+        >
+          Sair
+        </button>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleLogin} className="max-w-sm mx-auto p-4">
-      <h2 className="text-xl font-bold mb-4">Login</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
 
-      <label className="block mb-2">
+      <label htmlFor="email" className="block mb-4 font-medium text-gray-700">
         Email:
         <input
+          id="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full p-2 border rounded mt-1"
+          autoComplete="email"
+          className="w-full p-2 border rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </label>
 
-      <label className="block mb-4">
+      <label htmlFor="senha" className="block mb-6 font-medium text-gray-700">
         Senha:
         <input
+          id="senha"
           type="password"
           value={senha}
           onChange={(e) => setSenha(e.target.value)}
           required
-          className="w-full p-2 border rounded mt-1"
+          autoComplete="current-password"
+          className="w-full p-2 border rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </label>
 
@@ -76,12 +88,17 @@ const Login = () => {
         Entrar
       </button>
 
-      <div
+      <p
         onClick={() => navigate("/register")}
-        className="mt-4 text-center text-blue-600 hover:underline cursor-pointer"
+        className="mt-6 text-center text-blue-600 hover:underline cursor-pointer"
+        role="link"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") navigate("/register");
+        }}
       >
-        <p>Ainda não tem uma conta? Clique para criar uma!</p>
-      </div>
+        Ainda não tem uma conta? Clique para criar uma!
+      </p>
     </form>
   );
 };

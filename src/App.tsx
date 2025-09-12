@@ -14,6 +14,7 @@ import HomePage from './Page/Home/HomePage';
 
 import About from './Page/Institutional/About';
 import History from './Page/Institutional/History';
+import Politics from './Page/Institutional/politics';
 
 import FAQ from "./Page/Help/FAQ";
 import Contact from "./Page/Help/Contact";
@@ -65,7 +66,7 @@ function SupabasePage() {
   );
 }
 
-// ✅ Wrapper de Produto
+//  Wrapper de Produto
 function ProdutoWrapper() {
   const { idProduto } = useParams();
   
@@ -82,7 +83,7 @@ function ProdutoWrapper() {
   return <Produto produto={produtoEncontrado} />;
 }
 
-// ✅ Conteúdo principal do app
+//  Conteúdo principal do app
 function AppContent() {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
@@ -94,6 +95,7 @@ function AppContent() {
       <div className={!isHomePage ? 'pt-[60px]' : ''}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path='/politics' element={<Politics/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/artists" element={<Artist />} />
@@ -108,7 +110,7 @@ function AppContent() {
           <Route path="/produto/:idProduto" element={<ProdutoWrapper />} />
           <Route path="/ukdrip" element={<Ukdrip />} />
 
-          {/* ✅ Nova rota de teste para Supabase */}
+          {/*  Nova rota de teste para Supabase */}
           <Route path="/tasks" element={<SupabasePage />} />
         </Routes>
       </div>
@@ -121,7 +123,7 @@ function AppContent() {
   );
 }
 
-// ✅ Root do App
+//  Root do App
 function App() {
   return (
     <BrowserRouter>
