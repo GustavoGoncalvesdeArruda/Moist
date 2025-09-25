@@ -1,88 +1,89 @@
 import { useRef } from "react";
-import { produtos } from "./produtos";
+import { produtos } from "../../molecules/produtos/produtos";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 interface SectionProps {
   handleProductClick: (idProduto: string) => void;
   filtroCategoria?: string;
+  filtroNome?: string;
   filtroMarca?: string;
 }
 
 const Section: React.FC<SectionProps> = ({
   handleProductClick,
-  filtroCategoria = '',
-  filtroMarca = '',
+  filtroCategoria = "",
+  filtroNome = "",
+  filtroMarca = "",
 }) => {
+  // Ref exclusiva para este componente
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
+  // Funções de scroll
   const scrollLeft = () => {
-    scrollContainerRef.current?.scrollBy({ left: -400, behavior: "smooth" });
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
   };
 
   const scrollRight = () => {
-    scrollContainerRef.current?.scrollBy({ left: 400, behavior: "smooth" });
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
   };
-  
+
+  // Lógica de filtros
   const produtosFiltrados = produtos.filter((produto) => {
     const matchCategoria =
-      !filtroCategoria || filtroCategoria === 'Todos'
+      !filtroCategoria || filtroCategoria === "Todos"
         ? true
         : produto.categoria === filtroCategoria;
+
+    const matchNome = filtroNome
+      ? produto.titulo.toLowerCase().includes(filtroNome.toLowerCase())
+      : true;
 
     const matchMarca = filtroMarca
       ? produto.marca.toLowerCase().includes(filtroMarca.toLowerCase())
       : true;
 
-    return matchCategoria && matchMarca;
+    return matchCategoria && matchNome && matchMarca;
   });
 
   return (
-    <div className="font-serif relative my-10">
+    <div className="relative my-10 font-serif">
+      {/* Botões de navegação */}
       <button
         onClick={scrollLeft}
-        className="absolute left-2 top-1/2 -translate-y-1/2 z-10 text-black bg-white hover:bg-black hover:text-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center transition-all duration-200"
-        aria-label="Rolar para a esquerda"
+        className="absolute left-0 top-1/2 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-lg hover:bg-black transition z-10"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
+        <FaChevronLeft size={20} />
       </button>
 
       <button
         onClick={scrollRight}
-        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 text-black bg-white hover:bg-black hover:text-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center transition-all duration-200"
-        aria-label="Rolar para a direita"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
+        className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-lg hover:bg-black transition z-10"
+      > 
+        <FaChevronRight size={20} />
       </button>
 
+      {/* Lista de produtos */}
       <div
         ref={scrollContainerRef}
-        className="flex gap-4 px-12 overflow-x-auto scroll-smooth scrollbar-hide"
-        tabIndex={0} // para permitir foco e navegação com teclado
-        aria-label="Lista de produtos rolável"
+        className="flex overflow-x-auto gap-4 scrollbar-hide scroll-smooth px-10"
       >
         {produtosFiltrados.map((produto) => (
           <div
             key={produto.id}
+            className="min-w-[200px] cursor-pointer bg-black rounded-xl shadow-md p-3 hover:scale-105 transition"
             onClick={() => handleProductClick(produto.id)}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleProductClick(produto.id); }}
-            className="flex-shrink-0 w-56 bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer group transition-all duration-300 transform hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-            aria-label={`Produto: ${produto.titulo}, preço: ${produto.preco}`}
           >
             <img
               src={produto.imagem}
               alt={produto.titulo}
-              className="w-full h-72 object-cover"
-              loading="lazy"
+              className="w-full h-40 object-cover rounded-lg"
             />
-            <div className="p-4">
-              <h3 className="text-lg font-bold truncate">{produto.titulo}</h3>
-              <p className="text-md text-gray-600">{produto.preco}</p>
-            </div>
+            <h3 className="mt-2 font-bold text-lg">{produto.titulo}</h3>
+            <p className="text-gray-500">{produto.marca}</p>
           </div>
         ))}
       </div>

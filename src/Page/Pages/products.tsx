@@ -9,32 +9,35 @@ const Products = () => {
   const [searchParams] = useSearchParams();
   window.scrollTo(0, 0);
 
-  const [search, setSearch] = useState('');
-  const [categoria, setCategoria] = useState('');
-  const [precoMin, setPrecoMin] = useState('');
-  const [precoMax, setPrecoMax] = useState('');
+  const [search, setSearch] = useState("");
+  const [categoria, setCategoria] = useState("");
+  const [marca, setMarca] = useState(""); // ✅ novo estado para marca
+  const [precoMin, setPrecoMin] = useState("");
+  const [precoMax, setPrecoMax] = useState("");
 
-  const categorias = Array.from(new Set(produtos.map(p => p.categoria).filter(Boolean)));
+  const categorias = Array.from(new Set(produtos.map((p) => p.categoria).filter(Boolean)));
+  const marcas = Array.from(new Set(produtos.map((p) => p.marca).filter(Boolean))); // ✅ lista de marcas
 
   useEffect(() => {
-    const categoriaURL = searchParams.get('categoria');
-    if (categoriaURL) {
-      setCategoria(categoriaURL);
-    }
+    const categoriaURL = searchParams.get("categoria");
+    const marcaURL = searchParams.get("marca"); // ✅ pega marca da URL também
+    if (categoriaURL) setCategoria(categoriaURL);
+    if (marcaURL) setMarca(marcaURL);
   }, [searchParams]);
 
   const parsePreco = (preco: string) => {
-    const num = Number(preco.replace(/[^\d,]/g, '').replace(',', '.'));
+    const num = Number(preco.replace(/[^\d,]/g, "").replace(",", "."));
     return isNaN(num) ? 0 : num;
   };
 
   const filteredProducts = produtos.filter((produto) => {
     const matchNome = produto.titulo.toLowerCase().includes(search.toLowerCase());
     const matchCategoria = categoria ? produto.categoria === categoria : true;
+    const matchMarca = marca ? produto.marca === marca : true;
     const precoNumber = parsePreco(produto.preco);
     const matchPrecoMin = precoMin ? precoNumber >= Number(precoMin) : true;
     const matchPrecoMax = precoMax ? precoNumber <= Number(precoMax) : true;
-    return matchNome && matchCategoria && matchPrecoMin && matchPrecoMax;
+    return matchNome && matchCategoria && matchMarca && matchPrecoMin && matchPrecoMax;
   });
 
   const handleProductClick = (idProduto: string) => {
@@ -43,30 +46,53 @@ const Products = () => {
 
   return (
     <div className="flex min-h-screen bg-black text-neutral-200">
+      {/* Sidebar de filtros */}
       <aside className="w-full max-w-xs p-4 border-r border-neutral-800 flex flex-col gap-4 bg-neutral-900">
         <h2 className="text-xl font-bold mb-2">Filtros</h2>
+
+        {/* Nome */}
         <input
           type="text"
           placeholder="Buscar por nome"
           value={search}
-          onChange={e => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
           className="border border-neutral-700 bg-neutral-800 text-neutral-200 rounded px-3 py-2 mb-2 placeholder-neutral-400"
         />
+
+        {/* Categoria */}
         <select
           value={categoria}
-          onChange={e => setCategoria(e.target.value)}
+          onChange={(e) => setCategoria(e.target.value)}
           className="border border-neutral-700 bg-neutral-800 text-neutral-200 rounded px-3 py-2 mb-2"
         >
           <option value="">Todas categorias</option>
           {categorias.map((cat) => (
-            <option key={cat} value={cat}>{cat}</option>
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
           ))}
         </select>
+
+        {/* Marca */}
+        <select
+          value={marca}
+          onChange={(e) => setMarca(e.target.value)}
+          className="border border-neutral-700 bg-neutral-800 text-neutral-200 rounded px-3 py-2 mb-2"
+        >
+          <option value="">Todas marcas</option>
+          {marcas.map((m) => (
+            <option key={m} value={m}>
+              {m}
+            </option>
+          ))}
+        </select>
+
+        {/* Preço */}
         <input
           type="number"
           placeholder="Preço mínimo"
           value={precoMin}
-          onChange={e => setPrecoMin(e.target.value)}
+          onChange={(e) => setPrecoMin(e.target.value)}
           className="border border-neutral-700 bg-neutral-800 text-neutral-200 rounded px-3 py-2 mb-2 placeholder-neutral-400"
           min={0}
         />
@@ -74,16 +100,19 @@ const Products = () => {
           type="number"
           placeholder="Preço máximo"
           value={precoMax}
-          onChange={e => setPrecoMax(e.target.value)}
+          onChange={(e) => setPrecoMax(e.target.value)}
           className="border border-neutral-700 bg-neutral-800 text-neutral-200 rounded px-3 py-2 mb-2 placeholder-neutral-400"
           min={0}
         />
+
+        {/* Botão limpar */}
         <button
           onClick={() => {
-            setSearch('');
-            setCategoria('');
-            setPrecoMin('');
-            setPrecoMax('');
+            setSearch("");
+            setCategoria("");
+            setMarca("");
+            setPrecoMin("");
+            setPrecoMax("");
           }}
           className="bg-neutral-700 text-white rounded px-3 py-2 text-sm hover:bg-neutral-600"
         >
@@ -91,6 +120,7 @@ const Products = () => {
         </button>
       </aside>
 
+      {/* Lista de produtos */}
       <main className="flex-1 bg-black">
         <div className="grid gap-5 px-5 py-10 max-w-6xl mx-auto grid-cols-[repeat(auto-fit,minmax(240px,1fr))]">
           {filteredProducts.map((produto) => (
@@ -112,7 +142,14 @@ const Products = () => {
                   {produto.preco}
                 </p>
                 {produto.categoria && (
-                  <span className="block text-xs text-neutral-500 mt-1">{produto.categoria}</span>
+                  <span className="block text-xs text-neutral-500 mt-1">
+                    {produto.categoria}
+                  </span>
+                )}
+                {produto.marca && (
+                  <span className="block text-xs text-neutral-400 mt-1">
+                    {produto.marca}
+                  </span>
                 )}
               </div>
             </div>
@@ -123,7 +160,7 @@ const Products = () => {
         <div className="text-center mb-12">
           <BotaoPersonalizado
             texto="Página inicial"
-            onClick={() => navigate('/homepage')}
+            onClick={() => navigate("/homepage")}
             className="bg-black border border-neutral-700 hover:bg-neutral-800 text-white rounded-3xl px-8 py-3 text-lg italic transition"
           />
         </div>

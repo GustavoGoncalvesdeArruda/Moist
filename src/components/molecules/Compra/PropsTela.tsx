@@ -21,7 +21,7 @@ const ComponentsDetalhe: React.FC<ComponentsDetalheProps> = ({
     <div className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
       <Link
         to={`/products/${idProduto}`}
-        className="block p-4 space-y-4 hover:bg-gray-50 transition"
+        className="block p-4 space-y-4 hover:bg-black transition"
       >
         <div>
           <h2 className="text-xl font-semibold">{titulo}</h2>

@@ -1,12 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import ComponentsCardColecao from "../../components/props/CardFullImg/Cardimgfull";
 import Section from "../../components/molecules/produtos/Section";
 
-import UK from '../../image/Posters/UK.jpg';
 import Trapstar from '../../image/Trapstar.jpg';
 import Corteiz from '../../image/Corteiz.png';
-import Syna from '../../image/Posters/CC2.jpg';
 import of from '../../image/1of1.png';
 
 const Ukdrip = () => {
@@ -20,13 +17,6 @@ const Ukdrip = () => {
     <div className="font-sans bg-black min-h-screen text-neutral-200">
       <div className="flex-1 space-y-16 px-4 py-8">
 
-        <div>
-          <ComponentsCardColecao
-            titulo="Uk Drip"
-            desc="O UK Drip é um estilo de moda que se originou no Reino Unido e se tornou muito popular, especialmente no contexto da música drill e streetwear. Ele se caracteriza por um visual confiante, moderno e elegante, muitas vezes combinando roupas casuais com acessórios e peças de marcas de luxo. O termo drip em si se refere a um senso de moda único e elegante, que exala confiança e sofisticação."
-            imagem={UK}
-          />
-        </div>
 
         <div className='flex justify-center items-center text-2xl font-extrabold text-neutral-200'>
           <h1>Conheça mais sobre as principais marcas</h1>
@@ -96,13 +86,7 @@ const Ukdrip = () => {
         />
 
         {/* SynaWorld */}
-        <div onClick={() => navigate('/SynaWorld')}>
-          <ComponentsCardColecao
-            titulo="Syna World"
-            desc="Marca criada pelo Central Cee, e inspirado pelo estilo invernal londrino, essa coleção traz peso, conforto e identidade cultural."
-            imagem={Syna}
-            botao="Conhecer parceria"
-          />
+
 
           <h1 className='text-2xl font-bold text-center my-8 text-neutral-200'>
             STAY REAL. STAY WORLDWIDE
@@ -114,7 +98,6 @@ const Ukdrip = () => {
           filtroMarca="SynaWorld"
         />
       </div>
-    </div>
   );
 };
 

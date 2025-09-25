@@ -40,8 +40,8 @@ const Artist = () => {
   ];
 
   return (
-    <div className="font-serif flex justify-center bg-neutral-900 min-h-screen py-10 text-neutral-200">
-      <div className="w-full max-w-3xl bg-neutral-800 shadow-lg border border-neutral-700 rounded-md">
+    <div className="font-serif flex justify-center bg-black min-h-screen py-10 text-neutral-200">
+      <div className="w-full max-w-3xl bg-neutral-900 shadow-lg border border-neutral-700 rounded-md">
        
         {/* Cabeçalho */}
         <header className="flex flex-col items-center px-6 pt-8 pb-4 border-b border-neutral-600">

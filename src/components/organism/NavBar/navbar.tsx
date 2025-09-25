@@ -1,215 +1,280 @@
-import { useState , useEffect } from "react";
-import { useNavigate , Link } from "react-router-dom";
-import { FaSearch , FaShoppingCart, FaUserAlt} from "react-icons/fa";
-import { produtos } from "../../molecules/produtos/produtos";
-import logo from '../../../image/logoB.png'
-import Carrinho from "../../molecules/carrinho/carrinho"
+import { useState, useEffect, useRef } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { FaShoppingCart, FaUserAlt, FaSearch } from "react-icons/fa";
+import logo from "../../../image/Logo/logo.png";
+import Carrinho from "../../molecules/carrinho/carrinho";
+import Pesquisa from "../../molecules/Pesquisa/Pesquisa";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [carrinhoAberto, setCarrinhoAberto] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-
   const navigate = useNavigate();
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const toggleCarrinho = () => setCarrinhoAberto(!carrinhoAberto);
+  const [carrinhoAberto, setCarrinhoAberto] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const lastScrollY = useRef<number>(0);
+
+  const [showRoupasDropdown, setShowRoupasDropdown] = useState(false);
+  const [showSneakersDropdown, setShowSneakersDropdown] = useState(false);
+
+  // refs para leitura dentro do listener de scroll (evita stale closures)
+  const roupasOpenRef = useRef(false);
+  const sneakersOpenRef = useRef(false);
+
+  // timer para pequeno debounce ao fechar (evita flicker)
+  const closeTimerRef = useRef<number | null>(null);
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // menu lateral pesquisa
+
+  const toggleCarrinho = () => setCarrinhoAberto((s) => !s);
+
+  // helpers para abrir/fechar e manter refs sincronizadas
+  const cancelCloseTimer = () => {
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+  const scheduleClose = (fn: () => void, delay = 150) => {
+    cancelCloseTimer();
+    closeTimerRef.current = window.setTimeout(() => {
+      fn();
+      closeTimerRef.current = null;
+    }, delay);
+  };
+
+  const openRoupas = () => {
+    cancelCloseTimer();
+    setShowRoupasDropdown(true);
+    roupasOpenRef.current = true;
+  };
+  const closeRoupas = () => {
+    setShowRoupasDropdown(false);
+    roupasOpenRef.current = false;
+  };
+
+  const openSneakers = () => {
+    cancelCloseTimer();
+    setShowSneakersDropdown(true);
+    sneakersOpenRef.current = true;
+  };
+  const closeSneakers = () => {
+    setShowSneakersDropdown(false);
+    sneakersOpenRef.current = false;
+  };
 
   useEffect(() => {
-    const handleScroll = () => {};
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      // se um dropdown estiver aberto, manter a navbar visível
+      if (roupasOpenRef.current || sneakersOpenRef.current) {
+        setShowNavbar(true);
+        lastScrollY.current = window.scrollY;
+        return;
+      }
+
+      if (window.scrollY > lastScrollY.current && window.scrollY > 50) {
+        setShowNavbar(false);
+      } else {
+        setShowNavbar(true);
+      }
+      lastScrollY.current = window.scrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelCloseTimer();
+    };
   }, []);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-
-    // Sugestões de produtos pelo nome
-    if (value.trim()) {
-      const filtered = produtos
-        .filter((produto) =>
-          produto.titulo.toLowerCase().includes(value.toLowerCase())
-        )
-        .map((produto) => produto.titulo)
-        .slice(0, 5);
-      setSuggestions(filtered);
-    } else {
-      setSuggestions([]);
-    }
-  };
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchTerm.trim()) {
-      navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
-      setSearchTerm('');
-      setSuggestions([]);
-    }
-  };
-
-  const handleResetSearch = () => {
-    setSearchTerm('');
-    setSuggestions([]);
-  };
-
-  const handleSuggestionClick = (suggestion: string) => {
-    setSearchTerm('');
-    setSuggestions([]);
-
-    // Encontra o produto pelo título exato
-    const produto = produtos.find(
-      (p) => p.titulo.toLowerCase() === suggestion.toLowerCase()
-    );
-    if (produto) {
-      navigate(`/produto/${produto.id}`);
-    } else {
-      navigate(`/products?search=${encodeURIComponent(suggestion)}`);
-    }
-  };
 
   return (
     <div>
-      <nav className="font-serif fixed left-0 w-full h-16 z-20 italic bg-black shadow-md flex items-center px-4 transition-transform duration-300">
+      <nav
+        className={`font-serif fixed top-0 left-0 w-full z-30 italic bg-black shadow-md flex items-center justify-between px-6 py-2 transition-transform duration-300 ${
+          showNavbar ? "translate-y-0" : "-translate-y-full"
+        }`}
+        style={{ height: "64px" }}
+      >
+        {/* Logo */}
+        <img
+          src={logo}
+          alt="Logo"
+          className="h-12 w-12 cursor-pointer"
+          onClick={() => navigate("/homepage")}
+        />
 
-        {/*Logo*/}
-
-        <div className="flex items-center">
-          <img
-            src={logo}
-            alt="Logo"
-            className="mr-4 h-20 w-20 cursor-pointer"
-            onClick={() => navigate('/homepage')}
-          />
-        </div>
-
-        {/*Link da Navbar*/}
-
-        <div className="flex-1 flex justify-center">
-          <div className="flex items-center space-x-8 text-white text-base italic">
-            <Link to="/about" className="hover:text-gray-300 transition-colors duration-300">
-              Sobre
-            </Link>
-            <Link to="/contact" className="hover:text-gray-300 transition-colors duration-300">
-              Suporte
-            </Link>
-            <Link to="/products" className="hover:text-gray-300 transition-colors duration-300">
-              Produtos
-            </Link>
-            <></>
-          </div>
-        </div>
-
-        <div className="flex items-center space-x-8">
-          <form
-            onSubmit={handleSearchSubmit}
-            className="relative w-40"
-            autoComplete="off"
+        {/* Links principais */}
+        <div className="flex items-center space-x-6 text-white text-sm italic relative">
+          <Link
+            to="/homepage"
+            className="hover:text-gray-300 transition-colors duration-300"
           >
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={handleInputChange}
-              placeholder="Buscar..."
-              aria-label="Buscar produtos"
-              className="w-full py-1 pl-3 pr-8 text-sm rounded-3xl border border-gray-300 outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-            />
-            {searchTerm && (
-              <button
-                type="button"
-                onClick={handleResetSearch}
-                className="absolute right-7 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 text-xs"
-                aria-label="Limpar busca"
-              >
-                &times;
-              </button>
-            )}
-            <button
-              type="submit"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
-              aria-label="Buscar"
-            >
-              <FaSearch size={13} />
-            </button>
-            
-            {suggestions.length > 0 && (
-              <ul className="absolute left-0 top-10 w-full bg-white border border-gray-200 rounded shadow z-50">
-                {suggestions.map((suggestion, idx) => (
-                  <li
-                    key={idx}
-                    className="px-3 py-1 hover:bg-gray-100 cursor-pointer text-black text-sm"
-                    onClick={() => handleSuggestionClick(suggestion)}
-                  >
-                    {suggestion}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </form>
+            INÍCIO
+          </Link>
 
-          {/*Botão do Carrinho*/}
+          {/* ========== Dropdown Roupas (wrapper com handlers) ========== */}
+          <div
+            // wrapper do link (não precisa ser grande, os handlers estão também no dropdown)
+            onMouseEnter={openRoupas}
+            onMouseLeave={() => scheduleClose(closeRoupas)}
+            className="relative"
+          >
+            <Link
+              to="/products?categoria=Roupas"
+              className="hover:text-gray-300 transition-colors duration-300"
+            >
+              ROUPAS
+            </Link>
+
+            {showRoupasDropdown && (
+              <div
+                // também adicionamos handlers aqui para garantir que, ao entrar no dropdown,
+                // o estado permaneça aberto mesmo que o wrapper dispare mouseleave
+                onMouseEnter={openRoupas}
+                onMouseLeave={() => scheduleClose(closeRoupas)}
+                className="fixed left-0 top-[64px] w-full bg-black shadow-lg z-40 flex justify-center items-center gap-10 py-4"
+              >
+                <Link
+                  to="/products?categoria=Camisa"
+                  onClick={closeRoupas}
+                  className="text-white hover:text-gray-300"
+                >
+                  CAMISAS
+                </Link>
+                <Link
+                  to="/products?categoria=Calça"
+                  onClick={closeRoupas}
+                  className="text-white hover:text-gray-300"
+                >
+                  CALÇAS
+                </Link>
+                <Link
+                  to="/products?categoria=Conjunto"
+                  onClick={closeRoupas}
+                  className="text-white hover:text-gray-300"
+                >
+                  CONJUNTO
+                </Link>
+                <Link
+                  to="/products?categoria=Casaco/Jaqueta"
+                  onClick={closeRoupas}
+                  className="text-white hover:text-gray-300"
+                >
+                  CASACOS
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* ========== Dropdown Sneakers (mesma estratégia) ========== */}
+          <div
+            onMouseEnter={openSneakers}
+            onMouseLeave={() => scheduleClose(closeSneakers)}
+            className="relative"
+          >
+            <Link
+              to="/products?categoria=Tenis"
+              className="hover:text-gray-300 transition-colors duration-300"
+            >
+              SNEAKERS
+            </Link>
+
+            {showSneakersDropdown && (
+              <div
+                onMouseEnter={openSneakers}
+                onMouseLeave={() => scheduleClose(closeSneakers)}
+                className="fixed left-0 top-[64px] w-full bg-black shadow-lg z-40 flex justify-center items-center gap-10 py-4"
+              >
+                <Link
+                  to="/products?categoria=Tênis&marca=Adidas"
+                  onClick={closeSneakers}
+                  className="text-white hover:text-gray-300"
+                >
+                  ADIDAS
+                </Link>
+                <Link
+                  to="/products?categoria=Tênis&marca=Nike"
+                  onClick={closeSneakers}
+                  className="text-white hover:text-gray-300"
+                >
+                  NIKE
+                </Link>
+                <Link
+                  to="/products?categoria=Tênis&marca=NewBalance"
+                  onClick={closeSneakers}
+                  className="text-white hover:text-gray-300"
+                >
+                  NEW BALANCE
+                </Link>
+              </div>
+            )}
+          </div>
+
+          <Link
+            to="/products?categoria=Cravejados"
+            className="hover:text-gray-300 transition-colors duration-300"
+          >
+            CRAVEJADOS
+          </Link>
+          <Link
+            to="/products?categoria=Acessórios"
+            className="hover:text-gray-300 transition-colors duration-300"
+          >
+            ACESSÓRIOS
+          </Link>
+          <Link
+            to="/artists"
+            className="hover:text-gray-300 transition-colors duration-300"
+          >
+            ARTISTS
+          </Link>
+          <Link
+            to="/about"
+            className="hover:text-gray-300 transition-colors duration-300"
+          >
+            SOBRE
+          </Link>
+          <Link
+            to="/contact"
+            className="hover:text-gray-300 transition-colors duration-300"
+          >
+            CONTATO
+          </Link>
+        </div>
+
+        {/* Ícones lado direito */}
+        <div className="flex items-center space-x-4 text-white text-lg">
+          <button
+            onClick={() => setIsMenuOpen(true)}
+            className="focus:outline-none hover:scale-110 duration-150"
+            aria-label="Pesquisar"
+          >
+            <FaSearch />
+          </button>
+
           <button
             onClick={toggleCarrinho}
-            className="text-xl text-white focus:outline-none hover:-scale-x-100 duration-150"
+            className="focus:outline-none hover:scale-110 duration-150"
             aria-label="Abrir carrinho"
           >
             <FaShoppingCart />
           </button>
 
-          {/*Botão do Login*/   }
-          <button>
-            <Link to="/login" className="text-white hover:text-gray-300 transition-colors duration-300">
-              <FaUserAlt/> 
-            </Link>
-          </button>
-
-          {/*Botão do Menu*/}
-          <button
-            onClick={toggleMenu}
-            className="text-white text-xl focus:outline-none"
-            aria-label="Abrir menu"
+          <Link
+            to="/login"
+            className="hover:text-gray-300 transition-colors duration-300"
+            aria-label="Login"
           >
-            ☰
-          </button>
-
+            <FaUserAlt />
+          </Link>
         </div>
       </nav>
 
-
-      {/*Menu aberto*/}
-
-      {isMenuOpen && (
-        <div className="font-serif fixed top-0 left-0 h-full w-40 bg-black text-white p-5 flex flex-col z-20">
-          <button
-            onClick={toggleMenu}
-            className="text-xl mb-5 focus:outline-none"
-            aria-label="Fechar menu"
-          >
-            &times;
-          </button>
-          <Link to="/homepage" className="mb-4 text-xm text-3xl md:text-base">
-            Página Inicial
-          </Link>
-          <Link to="/about" className="mb-4 text-xm text-3xl md:text-base  ">
-            Sobre Nós
-          </Link>
-          <Link to="/contact" className="mb-4 text-xm text-3xl md:text-base  ">
-            Suporte
-          </Link>
-          <Link to="/history" className="mb-4 text-xm text-3xl md:text-base  ">
-            Nossa História
-          </Link>
-          <Link to="/products" className="mb-4 text-xm text-3xl md:text-base  ">
-            Produtos
-          </Link>
-        </div> 
-      )}
-
+      {/* Carrinho lateral */}
       {carrinhoAberto && (
         <Carrinho isOpen={carrinhoAberto} onClose={toggleCarrinho} />
       )}
-      
+
+      {/* Menu lateral pesquisa */}
+      <Pesquisa isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </div>
   );
 };

@@ -1,20 +1,20 @@
 // App.tsx
 import './index.css';
 import { BrowserRouter, useLocation, Routes, Route, useParams } from "react-router-dom";
-import { useState, useEffect } from 'react'; // ✅ Correção: import useState
+import { useState, useEffect } from 'react';
 import { produtos } from "./components/molecules/produtos/produtos"
 import { CartProvider } from './components/molecules/cartprovinder/cartcontext';
 import { supabase } from './supabaseClient';
  
+
 import Login from "./components/molecules/Login/login";
 import Register from "./components/molecules/Login/register";
 
-import Home from "./Page/Home/Home";
 import HomePage from './Page/Home/HomePage';
 
 import About from './Page/Institutional/About';
 import History from './Page/Institutional/History';
-import Politics from './Page/Institutional/politics';
+import Politics from './Page/Institutional/Politics';
 
 import FAQ from "./Page/Help/FAQ";
 import Contact from "./Page/Help/Contact";
@@ -29,7 +29,7 @@ import Artist from './Page/Pages/Artists';
 import SynaWorld from './Page/Pages/SynaWorld';
 import Ukdrip from './Page/Pages/Londres';
 
-import logob from './image/logoB.png';
+import logo from './image/Logo/logo.png';
 
 // Interface para tasks do Supabase
 interface Task {
@@ -94,7 +94,6 @@ function AppContent() {
 
       <div className={!isHomePage ? 'pt-[60px]' : ''}>
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path='/politics' element={<Politics/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
@@ -117,7 +116,7 @@ function AppContent() {
 
       <ComponentsFooter
         descricao="Moist Streetwear"
-        imagem={logob}
+        imagem={logo}
       />
     </CartProvider>
   );

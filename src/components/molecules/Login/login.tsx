@@ -52,10 +52,11 @@ const Login = () => {
   }
 
   return (
+  <div className=" p-20px min-h-screen flex items-center justify-center bg-gradient-to-br bg-black">
     <form onSubmit={handleLogin} className="max-w-sm mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+      <h2 className=" text-neutral-300 text-2xl font-bold mb-6 text-center">Login</h2>
 
-      <label htmlFor="email" className="block mb-4 font-medium text-gray-700">
+      <label htmlFor="email" className="block mb-4 font-medium text-neutral-300">
         Email:
         <input
           id="email"
@@ -68,7 +69,7 @@ const Login = () => {
         />
       </label>
 
-      <label htmlFor="senha" className="block mb-6 font-medium text-gray-700">
+      <label htmlFor="senha" className="block mb-6 font-medium text-neutral-300">
         Senha:
         <input
           id="senha"
@@ -100,6 +101,7 @@ const Login = () => {
         Ainda não tem uma conta? Clique para criar uma!
       </p>
     </form>
+  </div>
   );
 };
 
