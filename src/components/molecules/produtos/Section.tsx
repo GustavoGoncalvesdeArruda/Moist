@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { produtos } from "../../molecules/produtos/produtos";
+import { produtos } from "./produtos";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 interface SectionProps {
@@ -74,15 +74,15 @@ const Section: React.FC<SectionProps> = ({
         {produtosFiltrados.map((produto) => (
           <div
             key={produto.id}
-            className="min-w-[200px] cursor-pointer bg-black rounded-xl shadow-md p-3 hover:scale-105 transition"
+            className="min-w-[200px] cursor-pointer bg-black shadow-md p-3 hover:scale-105 transition mt-5 mb-5"
             onClick={() => handleProductClick(produto.id)}
           >
             <img
               src={produto.imagem}
-              alt={produto.titulo}
-              className="w-full h-40 object-cover rounded-lg"
+              alt={produto.titulo}xl
+              className="w-full h-40 object-cover rounded-sm"
             />
-            <h3 className="mt-2 font-bold text-lg">{produto.titulo}</h3>
+            <h3 className="mt-2 font-bold text-">{produto.titulo}</h3>
             <p className="text-gray-500">{produto.marca}</p>
           </div>
         ))}

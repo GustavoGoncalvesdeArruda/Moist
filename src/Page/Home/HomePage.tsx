@@ -2,21 +2,24 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Carousel from "../../components/props/Carrosel/Carrosel";
 
-import Max from "../../image/Posters/95.png";
-import DN from "../../image/Posters/DN.png"
-import DN8 from "../../image/Posters/DN 8.png"
-import TN from "../../image/Posters/TN.png"
+import Max from "../../image/Banner/95.png";
+import DN from "../../image/Banner/DN.png";
+import DN8 from "../../image/Banner/DN 8.png";
+import TN from "../../image/Banner/TN.png";
 
-import ComponentsImagemCard2 from "../../components/props/Card2/Card2";
+import ComponentsImagemCard2 from "../../components/props/Card2/CardImagem2";
 import ComponentsImagemCard from "../../components/props/Card/CardImagem";
 import Section from "../../components/molecules/produtos/Section";
 
-import NAOPERCA from "../../image/Posters/NÃO PERCA.png";
-import EXCLUSIVO from "../../image/Posters/PROMOÇÔES EXCLUSIVAS.png";
-import Nike from "../../image/Logo/Nike.png";
+import NAOPERCA from "../../image/Banner/NÃO PERCA.png";
+import EXCLUSIVO from "../../image/Banner/PROMOÇÔES EXCLUSIVAS.png";
+import Nike from "../../image/Logo/Nike.jpg";
 import OF from "../../image/Logo/1of1.png";
-import SynaWorld from "../../image/Logo/SynaWorld.jpg";
-import Corteiz from "../../image/Logo/Corteiz.jpg";
+import SynaWorld from "../../image/Logo/Syna.png";
+import Corteiz from "../../image/Logo/Corteiz.png";
+import Palace from "../../image/Logo/palace.png";
+import Acessorios from "../../image/Banner/Acessórios.png";
+import Cravejados from "../../image/Banner/Cravejados.png";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -25,7 +28,6 @@ const HomePage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Slides configuration
   const bannerSlides = [
     {
       imagem: NAOPERCA,
@@ -42,26 +44,21 @@ const HomePage = () => {
   return (
     <div className="font-serif bg-black text-white min-h-screen flex flex-col">
       <div className="flex-1">
-       
-       
         {/* Banner Carousel */}
         <div className="w-full h-full">
           <Carousel slides={bannerSlides} />
         </div>
 
-
-
         {/* Seção de links das marcas */}
         <h1 className="text-2xl font-bold text-center my-8 text-white">
           MARCAS
         </h1>
-        <div className="flex flex-row justify-center items-center gap-8 p-2 my-10 w-full max-w-screen-lg mx-auto">
+        <div className="flex flex-row justify-center items-center gap-8 p-2 w-full max-w-screen-lg mx-auto">
           <div role="button" tabIndex={0}>
             <ComponentsImagemCard imagem={Nike} filtromarca="Nike" />
           </div>
 
-          <div role="button" tabIndex={0}
-          >
+          <div role="button" tabIndex={0}>
             <ComponentsImagemCard imagem={OF} filtromarca="1of1" />
           </div>
 
@@ -69,45 +66,97 @@ const HomePage = () => {
             <ComponentsImagemCard imagem={Corteiz} filtromarca="Corteiz" />
           </div>
 
-          <div role="button" tabIndex={0}
-          >
+          <div role="button" tabIndex={0}>
+            <ComponentsImagemCard imagem={Palace} filtromarca="Palace" />
+          </div>
+
+          <div role="button" tabIndex={0}>
             <ComponentsImagemCard imagem={SynaWorld} filtromarca="SynaWorld" />
           </div>
         </div>
       </div>
 
+      {/* Tênis */}
+      <h1 className="text-2xl font-bold text-center my-8 text-white">TÊNIS</h1>
 
-    <h1 className="text-2xl font-bold text-center my-8 text-white">
-      TÊNIS
-    </h1>
+      <div className="grid grid-cols-2 gap-6 p-2 w-full max-w-screen-xl mx-auto">
+        <div role="button" tabIndex={0}>
+          <ComponentsImagemCard2
+            imagem={TN}
+            filtromarca="Nike"
+            filtromodelo="Air Max Plus"
+          />
+        </div>
 
-  {/* Tênis */}
-  <Section
-    handleProductClick={(idProduto: string) =>
-      navigate(`/products?categoria=Tênis/${idProduto}`)
-    }
-    filtroCategoria="Tênis"
-  />
+        <div role="button" tabIndex={0}>
+          <ComponentsImagemCard2
+            imagem={DN}
+            filtromarca="Adidas"
+            filtromodelo="Air Max DN"
+          />
+        </div>
 
-  {/* Grid de 2x2 */}
-  <div className="grid grid-cols-2 gap-8 p-2 my-10 w-full max-w-screen-lg mx-auto">
-    <div role="button" tabIndex={0}>
-      <ComponentsImagemCard2 imagem={TN} filtromarca="Nike" filtrocategoria="Tênis" />
+        <div role="button" tabIndex={0}>
+          <ComponentsImagemCard2
+            imagem={DN8}
+            filtromarca="NewBalance"
+            filtromodelo="Air Max DN8"
+          />
+        </div>
+
+        <div role="button" tabIndex={0}>
+          <ComponentsImagemCard2
+            imagem={Max}
+            filtromarca="Puma"
+            filtromodelo="AirMax95"
+          />
+        </div>
+      </div>
+
+      <Section
+        handleProductClick={(idProduto: string) =>
+          navigate(`/products?categoria=Tênis/${idProduto}`)
+        }
+        filtroCategoria="Tênis"
+      />
+
+      {/* Banners lado a lado */}
+      <div className="grid grid-cols-2 gap-6 p-2 w-full max-w-screen-xl mx-auto mt-12">
+        <div role="button" tabIndex={0}>
+          <ComponentsImagemCard2 imagem={Acessorios} filtrocategoria="Acessórios" />
+        </div>
+
+        <div role="button" tabIndex={0}>
+          <ComponentsImagemCard2 imagem={Cravejados} filtrocategoria="Cravejados" />
+        </div>
+      </div>
+
+      {/* Seção de Acessórios */}
+      <h1 className="text-2xl font-bold text-center my-8 text-white">
+        ACESSÓRIOS
+      </h1>
+      <div className="w-full max-w-screen-xl mx-auto flex flex-col">
+        <Section
+          handleProductClick={(idProduto: string) =>
+            navigate(`/products?categoria=Acessórios/${idProduto}`)
+          }
+          filtroCategoria="Acessórios"
+        />
+      </div>
+
+      {/* Seção de Cravejados */}
+      <h1 className="text-2xl font-bold text-center my-8 text-white">
+        CRAVEJADOS
+      </h1>
+      <div className="w-full max-w-screen-xl mx-auto flex flex-col">
+        <Section
+          handleProductClick={(idProduto: string) =>
+            navigate(`/products?categoria=Cravejados/${idProduto}`)
+          }
+          filtroCategoria="Cravejados"
+        />
+      </div>
     </div>
-
-    <div role="button" tabIndex={0}>
-      <ComponentsImagemCard2 imagem={DN} filtromarca="Adidas" filtrocategoria="Tênis" />
-    </div>
-
-    <div role="button" tabIndex={0}>
-      <ComponentsImagemCard2 imagem={DN8} filtromarca="NewBalance" filtrocategoria="Tênis" />
-    </div>
-
-    <div role="button" tabIndex={0}>
-      <ComponentsImagemCard2 imagem={Max} filtromarca="Puma" filtrocategoria="Tênis" />
-    </div>
-  </div>
-</div>
   );
 };
 

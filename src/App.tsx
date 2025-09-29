@@ -6,7 +6,6 @@ import { produtos } from "./components/molecules/produtos/produtos"
 import { CartProvider } from './components/molecules/cartprovinder/cartcontext';
 import { supabase } from './supabaseClient';
  
-
 import Login from "./components/molecules/Login/login";
 import Register from "./components/molecules/Login/register";
 
@@ -20,7 +19,7 @@ import FAQ from "./Page/Help/FAQ";
 import Contact from "./Page/Help/Contact";
 import Returns from "./Page/Help/Returns";
 
-import Produto from "./components/molecules/Compra/Tela";
+import Produto from "./components/molecules/Buy/Tela";
 import ComponentsFooter from "./components/organism/footer/footer";
 import Navbar from './components/organism/navbar/navbar';
 
