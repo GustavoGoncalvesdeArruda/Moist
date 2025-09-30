@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaShoppingCart, FaUserAlt, FaSearch } from "react-icons/fa";
 import logo from "../../../image/Logo/logo.png";
@@ -9,41 +9,15 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const [carrinhoAberto, setCarrinhoAberto] = useState(false);
-  const [showNavbar, setShowNavbar] = useState(true);
-  const lastScrollY = useRef<number>(0);
-
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleCarrinho = () => setCarrinhoAberto((s) => !s);
 
-  // Oculta/mostra navbar ao rolar a página
-  useEffect(() => {
-    const handleScroll = () => {
-      if (activeDropdown) {
-        setShowNavbar(true);
-        lastScrollY.current = window.scrollY;
-        return;
-      }
-
-      if (window.scrollY > lastScrollY.current && window.scrollY > 50) {
-        setShowNavbar(false);
-      } else {
-        setShowNavbar(true);
-      }
-      lastScrollY.current = window.scrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [activeDropdown]);
-
   return (
     <div>
       <nav
-        className={`font-serif fixed top-0 left-0 w-full z-30 italic bg-black shadow-md flex items-center justify-between px-6 transition-transform duration-300 ${
-          showNavbar ? "translate-y-0" : "-translate-y-full"
-        }`}
+        className="font-serif fixed top-0 left-0 w-full z-30 italic bg-black shadow-md flex items-center justify-between px-6"
         style={{ height: "64px" }}
       >
         {/* Logo */}
@@ -69,12 +43,8 @@ const Navbar = () => {
             onMouseEnter={() => setActiveDropdown("roupas")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
-            <Link
-              to="/products?categoria=Roupas"
-              className="hover:text-gray-300 transition-colors duration-300"
-            >
               ROUPAS
-            </Link>
+           
 
             {activeDropdown === "roupas" && (
               <div className="fixed w-screen left-0 bg-black shadow-lg z-40 flex justify-center items-center gap-10 py-4">
@@ -100,12 +70,7 @@ const Navbar = () => {
             onMouseEnter={() => setActiveDropdown("sneakers")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
-            <Link
-              to="/products?categoria=Tenis"
-              className="hover:text-gray-300 transition-colors duration-300"
-            >
               SNEAKERS
-            </Link>
 
             {activeDropdown === "sneakers" && (
               <div className="fixed w-screen left-0 bg-black shadow-lg z-40 flex justify-center items-center gap-10 py-4">
@@ -142,9 +107,8 @@ const Navbar = () => {
             onMouseEnter={() => setActiveDropdown("sobre")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
-            <Link to="/about" className="hover:text-gray-300 transition-colors duration-300">
               SOBRE
-            </Link>
+            
 
             {activeDropdown === "sobre" && (
               <div className="fixed w-screen left-0 bg-black shadow-lg z-40 flex justify-center items-center gap-10 py-4">

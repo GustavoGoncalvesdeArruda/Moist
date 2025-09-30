@@ -17,6 +17,7 @@ export interface Produto {
 export const produtos: Produto[] = [
 
     /*
+    {
       id: '',
       titulo: '',
       preco: '',
@@ -27,6 +28,7 @@ export const produtos: Produto[] = [
       modelo: '',
       tamanhos: [],
       marca: '',
+    },
     */
    
   {
@@ -536,8 +538,70 @@ export const produtos: Produto[] = [
     tamanhos: ['P', 'M', 'G', 'GG'],
     marca: '1of1',
   },
-
-
+  
+    {
+      id: '43',
+      titulo: 'Corteiz Alcatraz Denim',
+      preco: 'R$ 299,90',
+      imagem: 'https://droper-lapse.us-southeast-1.linodeobjects.com/20240925233613618-873.webp',
+      imagemdesc: 'https://droper-lapse.us-southeast-1.linodeobjects.com/20240925233613503-834.webp',
+      desc: '',
+      categoria: 'Bermuda',
+      modelo: 'Denim',
+      tamanhos: ['P', 'M', 'G', 'GG'],
+      marca: 'Corteiz',
+    },
+    {
+      id: '44',
+      titulo: 'Corteiz Alcatraz Denim',
+      preco: 'R$ 299,90',
+      imagem: 'https://cdn.awsli.com.br/1733/1733740/produto/291568976/corteiz-bermuda-16uk1syjjd.jpg',
+      imagemdesc: 'https://cdn.awsli.com.br/1733/1733740/produto/291568976/corteiz-jeans-atptjxhl49.jpg',
+      desc: '',
+      categoria: 'Bermuda',
+      modelo: 'Denim',
+      tamanhos: ['P', 'M', 'G', 'GG'],
+      marca: 'Corteiz',
+    },
+    
+    {
+      id: '45',
+      titulo: 'Corteiz C-star Denim Faded',
+      preco: 'R$ 399,90',
+      imagem: 'https://hypevision.pt/cdn/shop/files/corteizjorts-front.jpg?v=1751637708',
+      imagemdesc: 'https://lisabonastreetwear.pt/cdn/shop/files/Corteiz-C-Star-Denim-Shorts-Black.png?v=1750930135',
+      desc: '',
+      categoria: 'Bermuda',
+      modelo: 'Denim',
+      tamanhos: ['P', 'M', 'G', 'GG'],
+      marca: 'Corteiz',
+    },
+    
+    {
+      id: '46',
+      titulo: 'Bermuda Denim Tears',
+      preco: 'R$ 499,90',
+      imagem: 'https://martin4shop.com.br/cdn/shop/files/moletom-denim-tears.jpg?v=1755130032',
+      imagemdesc: '',
+      desc: '',
+      categoria: 'Bermuda',
+      modelo: 'Denim',
+      tamanhos: ['P', 'M', 'G', 'GG'],
+      marca: 'Denim Tears',
+    },
+    {
+      id: '47',
+      titulo: 'Denim Tears The Cotton Wreath',
+      preco: 'R$ 499,90',
+      imagem: 'https://topasrun.com/wp-content/uploads/2024/11/Bermuda-Jeans-Denim-Tears-Preta-1.jpg',
+      imagemdesc: 'https://droper-lapse.us-southeast-1.linodeobjects.com/20240908152619908-671.webp',
+      desc: '',
+      categoria: 'Bermuda',
+      modelo: 'Denim',
+      tamanhos: ['P', 'M', 'G', 'GG'],
+      marca: 'Denim Tears',
+    },
+  
 ];
 
 export const ProdutosPage = () => {

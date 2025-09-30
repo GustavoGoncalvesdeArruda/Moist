@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCart } from "../cartprovinder/cartcontext";
 import Section from "../produtos/Section";
-import Drop from "../../props/Drop/drop"
+import Drop from "../../props/Drop/drop";
 
 interface ProdutoType {
   id: string;
@@ -59,7 +59,7 @@ const Produto = ({ produto }: ProdutoProps) => {
   const navigate = useNavigate();
   const { idProduto } = useParams();
 
-  // Dados para o dropdown
+  // Dados do dropdown
   const perguntas = [
     {
       titulo: "Qualidade",
@@ -107,24 +107,20 @@ const Produto = ({ produto }: ProdutoProps) => {
   return (
     <div className="min-h-screen bg-black text-neutral-200 font-sans">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 py-12 px-4 md:px-8">
-        
-        {/* Coluna Esquerda: Imagens + Drop */}
+
+        {/* Coluna Esquerda: Imagens */}
         <div className="flex flex-col gap-6 w-full md:w-1/2 items-center md:items-start">
           <ProductImage src={produto.imagem} alt={produto.titulo} />
           <ProductImage
             src={produto.imagemdesc}
             alt={`${produto.titulo} detalhe`}
           />
-
-          {/* Dropdown abaixo das imagens */}
-          <div className="w-full mt-6">
-            <Drop perguntas={perguntas} />
-          </div>
         </div>
 
-        {/* Coluna Direita: Detalhes do produto */}
-        <div className="flex-1 flex flex-col justify-between">
+        {/* Coluna Direita: Detalhes e Drop abaixo dos botões */}
+        <div className="flex-1 flex flex-col">
           <div>
+            {/* Detalhes do Produto */}
             <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tight uppercase">
               {produto.titulo}
             </h1>
@@ -186,6 +182,11 @@ const Produto = ({ produto }: ProdutoProps) => {
                 Comprar Agora
               </button>
             </div>
+          </div>
+
+          {/* Drop ao lado das imagens, mas abaixo dos botões */}
+          <div className="mt-10">
+            <Drop perguntas={perguntas} />
           </div>
         </div>
       </div>

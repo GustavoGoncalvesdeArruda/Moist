@@ -15,10 +15,8 @@ const Section: React.FC<SectionProps> = ({
   filtroNome = "",
   filtroMarca = "",
 }) => {
-  // Ref exclusiva para este componente
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
-  // Funções de scroll
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({ left: -300, behavior: "smooth" });
@@ -31,7 +29,6 @@ const Section: React.FC<SectionProps> = ({
     }
   };
 
-  // Lógica de filtros
   const produtosFiltrados = produtos.filter((produto) => {
     const matchCategoria =
       !filtroCategoria || filtroCategoria === "Todos"
@@ -62,19 +59,19 @@ const Section: React.FC<SectionProps> = ({
       <button
         onClick={scrollRight}
         className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-lg hover:bg-black transition z-10"
-      > 
+      >
         <FaChevronRight size={20} />
       </button>
 
       {/* Lista de produtos */}
       <div
         ref={scrollContainerRef}
-        className="flex overflow-x-auto gap-4 scrollbar-hide scroll-smooth px-15"
+        className="flex overflow-x-auto gap-4 scrollbar-hide scroll-smooth px-4"
       >
         {produtosFiltrados.map((produto) => (
           <div
             key={produto.id}
-            className="min-w-[200px] min-h-[200px] cursor-pointer bg-black shadow-md hover:scale-105 transition mt-5 mb-5"
+            className="min-w-[200px] max-w-[200px] cursor-pointer bg-black shadow-md hover:scale-105 transition mt-5 mb-5 flex-shrink-0"
             onClick={() => handleProductClick(produto.id)}
           >
             <img
@@ -82,8 +79,10 @@ const Section: React.FC<SectionProps> = ({
               alt={produto.titulo}
               className="w-full h-40 object-cover rounded-sm"
             />
-            <h3 className="mt-2 font-bold text-">{produto.titulo}</h3>
-            <p className="text-gray-500">{produto.marca}</p>
+            <h3 className="mt-2 font-bold text-white text-sm break-words">
+              {produto.titulo}
+            </h3>
+            <p className="text-gray-500 text-xs truncate">{produto.marca}</p>
           </div>
         ))}
       </div>

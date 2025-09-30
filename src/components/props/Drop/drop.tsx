@@ -22,7 +22,7 @@ const DropdownFAQ: React.FC<DropdownFAQProps> = ({ perguntas, className }) => {
       {perguntas.map((item, idx) => (
         <div key={idx}>
           <button
-            className={`w-full flex justify-between items-center text-lg font-semibold py-3 px-4 transition-colors duration-300 rounded-lg
+            className={`w-full flex justify-between items-center text-lg font-semibold py-3 px-4 transition-colors duration-300
               ${
                 aberta === idx
                   ? "bg-neutral-900 text-white shadow-md"

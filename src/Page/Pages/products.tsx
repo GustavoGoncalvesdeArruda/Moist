@@ -122,7 +122,7 @@ const Products = () => {
 
       {/* Lista de produtos */}
       <main className="flex-1 bg-black">
-        <div className="grid gap-5 px-5 py-10 max-w-6xl mx-auto grid-cols-[repeat(auto-fit,minmax(240px,1fr))]">
+        <div className="grid gap-5 px-5 py-5 max-w-5xl mx-auto grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
           {filteredProducts.map((produto) => (
             <div
               key={produto.id}
