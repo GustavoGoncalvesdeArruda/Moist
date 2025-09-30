@@ -69,17 +69,17 @@ const Section: React.FC<SectionProps> = ({
       {/* Lista de produtos */}
       <div
         ref={scrollContainerRef}
-        className="flex overflow-x-auto gap-4 scrollbar-hide scroll-smooth px-10"
+        className="flex overflow-x-auto gap-4 scrollbar-hide scroll-smooth px-15"
       >
         {produtosFiltrados.map((produto) => (
           <div
             key={produto.id}
-            className="min-w-[200px] cursor-pointer bg-black shadow-md p-3 hover:scale-105 transition mt-5 mb-5"
+            className="min-w-[200px] min-h-[200px] cursor-pointer bg-black shadow-md hover:scale-105 transition mt-5 mb-5"
             onClick={() => handleProductClick(produto.id)}
           >
             <img
               src={produto.imagem}
-              alt={produto.titulo}xl
+              alt={produto.titulo}
               className="w-full h-40 object-cover rounded-sm"
             />
             <h3 className="mt-2 font-bold text-">{produto.titulo}</h3>

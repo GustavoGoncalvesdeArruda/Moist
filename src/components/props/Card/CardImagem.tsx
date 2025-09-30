@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 interface ComponentsCardProps {
+
   imagem?: string;
   filtromarca?: string;
   destino?: string;
@@ -26,6 +27,7 @@ const ComponentsImagemCard: React.FC<ComponentsCardProps> = ({
       onClick={handleClick}
       className="relative w-64 h-40 flex-shrink-0 rounded-lg overflow-hidden shadow-md cursor-pointer transition-transform duration-300 hover:scale-105"
     >
+  
       <img src={imagem} className="w-full h-full object-cover" />
       <div className="absolute bottom-3 left-1/2 -translate-x-1/2">
         <button

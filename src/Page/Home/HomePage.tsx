@@ -123,18 +123,16 @@ const HomePage = () => {
       {/* Banners lado a lado */}
       <div className="grid grid-cols-2 gap-6 p-2 w-full max-w-screen-xl mx-auto mt-12">
         <div role="button" tabIndex={0}>
-          <ComponentsImagemCard2 imagem={Acessorios} filtrocategoria="Acessórios" />
+          <ComponentsImagemCard2 titulo='ACESSÓRIOS' imagem={Acessorios} filtrocategoria="Acessórios" />
         </div>
 
         <div role="button" tabIndex={0}>
-          <ComponentsImagemCard2 imagem={Cravejados} filtrocategoria="Cravejados" />
+          <ComponentsImagemCard2 titulo='CRAVEJADOS' imagem={Cravejados} filtrocategoria="Cravejados" />
         </div>
       </div>
 
+
       {/* Seção de Acessórios */}
-      <h1 className="text-2xl font-bold text-center my-8 text-white">
-        ACESSÓRIOS
-      </h1>
       <div className="w-full max-w-screen-xl mx-auto flex flex-col">
         <Section
           handleProductClick={(idProduto: string) =>
@@ -144,10 +142,8 @@ const HomePage = () => {
         />
       </div>
 
+
       {/* Seção de Cravejados */}
-      <h1 className="text-2xl font-bold text-center my-8 text-white">
-        CRAVEJADOS
-      </h1>
       <div className="w-full max-w-screen-xl mx-auto flex flex-col">
         <Section
           handleProductClick={(idProduto: string) =>

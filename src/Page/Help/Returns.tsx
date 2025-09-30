@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import sportlife from '../../image/Posters/sportlife3.png'
 import sportlife2 from '../../image/Posters/sportlife2.png'
 
@@ -45,7 +45,13 @@ const Returns = () => {
 
   const handleToggle = (idx: number) => {
     setAberta(aberta === idx ? null : idx);
+
   };
+
+   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-neutral-900 font-sans text-neutral-200">
@@ -67,7 +73,7 @@ const Returns = () => {
 
         {/* Perguntas e respostas */}
         <div className="w-full md:w-1/2 md:pl-8 flex flex-col justify-center">
-          <h1 className="text-4xl font-extrabold text-red-500 text-center mb-8 tracking-tight">
+          <h1 className="text-4xl font-extrabold text-white text-center mb-8 tracking-tight">
             Política de Trocas e Devoluções
           </h1>
           <p className="text-lg text-neutral-400 text-center md:text-left mb-8 max-w-xl mx-auto md:mx-0">

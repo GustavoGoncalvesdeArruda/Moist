@@ -1,11 +1,10 @@
 // App.tsx
 import './index.css';
 import { BrowserRouter, useLocation, Routes, Route, useParams } from "react-router-dom";
-import { useState, useEffect } from 'react';
-import { produtos } from "./components/molecules/produtos/produtos"
+import { useEffect } from 'react';
+import { produtos } from "./components/molecules/produtos/produtos";
 import { CartProvider } from './components/molecules/cartprovinder/cartcontext';
-import { supabase } from './supabaseClient';
- 
+
 import Login from "./components/molecules/Login/login";
 import Register from "./components/molecules/Login/register";
 
@@ -30,45 +29,10 @@ import Ukdrip from './Page/Pages/Londres';
 
 import logo from './image/Logo/logo.png';
 
-// Interface para tasks do Supabase
-interface Task {
-  id: number
-  title: string
-}
-
-// Componente de teste do Supabase
-function SupabasePage() {
-  const [tasks, setTasks] = useState<Task[]>([]);
-
-  useEffect(() => {
-    fetchTasks()
-  }, [])
-
-  async function fetchTasks() {
-    const { data, error } = await supabase
-      .from<Task>('tasks')
-      .select('*')
-
-    if (error) console.log('Erro:', error)
-    else if (data) setTasks(data)
-  }
-
-  return (
-    <div>
-      <h1>Lista de Tasks (Supabase)</h1>
-      <ul>
-        {tasks.map(task => (
-          <li key={task.id}>{task.title}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
 //  Wrapper de Produto
 function ProdutoWrapper() {
   const { idProduto } = useParams();
-  
+
   useEffect(() => {
     document.title = 'Moist';
   }, []);
@@ -93,6 +57,7 @@ function AppContent() {
 
       <div className={!isHomePage ? 'pt-[60px]' : ''}>
         <Routes>
+          <Route path='/' element={<HomePage/>} />
           <Route path='/politics' element={<Politics/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
@@ -107,9 +72,6 @@ function AppContent() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/produto/:idProduto" element={<ProdutoWrapper />} />
           <Route path="/ukdrip" element={<Ukdrip />} />
-
-          {/*  Nova rota de teste para Supabase */}
-          <Route path="/tasks" element={<SupabasePage />} />
         </Routes>
       </div>
 

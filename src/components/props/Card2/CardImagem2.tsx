@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
 interface ComponentsCardProps2 {
+
+  titulo?: string;
   imagem?: string;
   filtromarca?: string; // Filtro de categoria para redirecionamento
   filtrocategoria?: string;
@@ -9,6 +11,7 @@ interface ComponentsCardProps2 {
 }
 
 const ComponentsImagemCard2: React.FC<ComponentsCardProps2> = ({
+  titulo,
   imagem,
   filtromarca,
   filtrocategoria,
@@ -36,6 +39,7 @@ const ComponentsImagemCard2: React.FC<ComponentsCardProps2> = ({
 
   return (
     <div className="hover: flex flex-col items-center w-full rounded-lg overflow-hidden shadow-md">
+      <h1 className="text-2xl font-bold text-center text-white">{titulo}</h1>
       {/* Imagem */}
       <img
         src={imagem}
@@ -44,7 +48,7 @@ const ComponentsImagemCard2: React.FC<ComponentsCardProps2> = ({
       />
 
       {/* Botão embaixo */}
-      <div className="w-full flex justify-center py-3">
+      <div className="w-full flex justify-center py-1">
         <button
           onClick={handleClick}
           type="button"

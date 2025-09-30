@@ -12,16 +12,14 @@ const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(true);
   const lastScrollY = useRef<number>(0);
 
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null); 
-  // null = nenhum aberto, "roupas" ou "sneakers"
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // menu lateral pesquisa
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleCarrinho = () => setCarrinhoAberto((s) => !s);
 
+  // Oculta/mostra navbar ao rolar a página
   useEffect(() => {
     const handleScroll = () => {
-      // mantém navbar visível quando algum dropdown está aberto
       if (activeDropdown) {
         setShowNavbar(true);
         lastScrollY.current = window.scrollY;
@@ -43,8 +41,8 @@ const Navbar = () => {
   return (
     <div>
       <nav
-        className={`font-serif fixed top-0 left-0 w-full z-30 italic bg-black shadow-md flex items-center justify-between px-6 ${
-          showNavbar ? "" : ""
+        className={`font-serif fixed top-0 left-0 w-full z-30 italic bg-black shadow-md flex items-center justify-between px-6 transition-transform duration-300 ${
+          showNavbar ? "translate-y-0" : "-translate-y-full"
         }`}
         style={{ height: "64px" }}
       >
@@ -79,31 +77,17 @@ const Navbar = () => {
             </Link>
 
             {activeDropdown === "roupas" && (
-              <div
-                className="fixed w-screen left-0 bg-black shadow-lg z-40 flex justify-center items-center gap-10 py-4"
-              >
-                <Link
-                  to="/products?categoria=Camisa"
-                  className="text-white hover:text-gray-300"
-                >
+              <div className="fixed w-screen left-0 bg-black shadow-lg z-40 flex justify-center items-center gap-10 py-4">
+                <Link to="/products?categoria=Camisa" className="text-white hover:text-gray-300">
                   CAMISAS
                 </Link>
-                <Link
-                  to="/products?categoria=Calça"
-                  className="text-white hover:text-gray-300"
-                >
+                <Link to="/products?categoria=Calça" className="text-white hover:text-gray-300">
                   CALÇAS
                 </Link>
-                <Link
-                  to="/products?categoria=Conjunto"
-                  className="text-white hover:text-gray-300"
-                >
+                <Link to="/products?categoria=Conjunto" className="text-white hover:text-gray-300">
                   CONJUNTO
                 </Link>
-                <Link
-                  to="/products?categoria=Casaco/Jaqueta"
-                  className="text-white hover:text-gray-300"
-                >
+                <Link to="/products?categoria=Casaco/Jaqueta" className="text-white hover:text-gray-300">
                   CASACOS
                 </Link>
               </div>
@@ -124,25 +108,14 @@ const Navbar = () => {
             </Link>
 
             {activeDropdown === "sneakers" && (
-              <div
-                className="fixed w-screen left-0 bg-black shadow-lg z-40 flex justify-center items-center gap-10 py-4"
-              >
-                <Link
-                  to="/products?categoria=Tênis&marca=Adidas"
-                  className="text-white hover:text-gray-300"
-                >
+              <div className="fixed w-screen left-0 bg-black shadow-lg z-40 flex justify-center items-center gap-10 py-4">
+                <Link to="/products?categoria=Tênis&marca=Adidas" className="text-white hover:text-gray-300">
                   ADIDAS
                 </Link>
-                <Link
-                  to="/products?categoria=Tênis&marca=Nike"
-                  className="text-white hover:text-gray-300"
-                >
+                <Link to="/products?categoria=Tênis&marca=Nike" className="text-white hover:text-gray-300">
                   NIKE
                 </Link>
-                <Link
-                  to="/products?categoria=Tênis&marca=NewBalance"
-                  className="text-white hover:text-gray-300"
-                >
+                <Link to="/products?categoria=Tênis&marca=NewBalance" className="text-white hover:text-gray-300">
                   NEW BALANCE
                 </Link>
               </div>
@@ -155,6 +128,7 @@ const Navbar = () => {
           >
             CRAVEJADOS
           </Link>
+
           <Link
             to="/products?categoria=Acessórios"
             className="hover:text-gray-300 transition-colors duration-300"
@@ -162,39 +136,25 @@ const Navbar = () => {
             ACESSÓRIOS
           </Link>
 
-           <div
+          {/* Dropdown Sobre */}
+          <div
             className="relative"
-            onMouseEnter={() => setActiveDropdown("roupas")}
+            onMouseEnter={() => setActiveDropdown("sobre")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
-            <Link
-              to="/products?categoria=Roupas"
-              className="hover:text-gray-300 transition-colors duration-300"
-            >
+            <Link to="/about" className="hover:text-gray-300 transition-colors duration-300">
               SOBRE
             </Link>
 
-            {activeDropdown === "roupas" && (
-              <div
-                className="fixed w-screen left-0 bg-black shadow-lg z-40 flex justify-center items-center gap-10 py-4"
-              >
-                <Link
-                  to="/About"
-                  className="text-white hover:text-gray-300"
-                >
+            {activeDropdown === "sobre" && (
+              <div className="fixed w-screen left-0 bg-black shadow-lg z-40 flex justify-center items-center gap-10 py-4">
+                <Link to="/about" className="text-white hover:text-gray-300">
                   SOBRE
                 </Link>
-                <Link
-                  to="/Contact"
-                  className="text-white hover:text-gray-300"
-                >
+                <Link to="/contact" className="text-white hover:text-gray-300">
                   CONTATO
                 </Link>
-
-                <Link
-                  to="/Artists"
-                  className="text-white hover:text-gray-300"
-                >
+                <Link to="/artists" className="text-white hover:text-gray-300">
                   ARTISTAS
                 </Link>
               </div>
@@ -231,9 +191,7 @@ const Navbar = () => {
       </nav>
 
       {/* Carrinho lateral */}
-      {carrinhoAberto && (
-        <Carrinho isOpen={carrinhoAberto} onClose={toggleCarrinho} />
-      )}
+      {carrinhoAberto && <Carrinho isOpen={carrinhoAberto} onClose={toggleCarrinho} />}
 
       {/* Menu lateral pesquisa */}
       <Pesquisa isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
